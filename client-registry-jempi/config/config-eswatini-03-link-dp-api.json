@@ -19,6 +19,32 @@
       "accessLevel": []
     },
     {
+      "fieldName": "pin",
+      "fieldType": "String",
+      "fieldLabel": "PIN",
+      "groups": [
+        "identifiers",
+        "linked_records",
+        "record_details"
+      ],
+      "scope": [
+        "/record-details/:uid",
+        "/notifications/match-details",
+        "/record-details/:uid/relink",
+        "/search/simple",
+        "/search/custom",
+        "/search-results/golden",
+        "/search-results/patient",
+        "/browse-records"
+      ],
+      "accessLevel": [],
+      "validation": {
+        "required": true,
+        "regex": "",
+        "onErrorMessage": "The pin cannot be empty"
+      }
+    },
+    {
       "fieldName": "firstName",
       "fieldType": "String",
       "fieldLabel": "First Name",
@@ -41,7 +67,7 @@
       ],
       "validation": {
         "required": true,
-        "onErrorMessage": "The family name cannot be empty"
+        "onErrorMessage": "The first name cannot be empty"
       },
       "accessLevel": []
     },
@@ -68,7 +94,7 @@
       ],
       "validation": {
         "required": true,
-        "onErrorMessage": "The family name cannot be empty"
+        "onErrorMessage": "The middle name cannot be empty"
       },
       "accessLevel": []
     },
@@ -95,7 +121,32 @@
       ],
       "validation": {
         "required": true,
-        "onErrorMessage": "The family name cannot be empty"
+        "onErrorMessage": "The surname name cannot be empty"
+      },
+      "accessLevel": []
+    },
+    {
+      "fieldName": "sex",
+      "fieldType": "String",
+      "fieldLabel": "Sex",
+      "groups": [
+        "demographics",
+        "filter",
+        "sub_heading",
+        "linked_records",
+        "record_details"
+      ],
+      "scope": [
+        "/record-details/:uid",
+        "/notifications/match-details",
+        "/record-details/:uid/relink",
+        "/search/custom",
+        "/browse-records"
+      ],
+      "validation": {
+        "required": true,
+        "regex": "^(male|female)$",
+        "onErrorMessage": "Sex cannot be empty and should either be male, female or neutral"
       },
       "accessLevel": []
     },
@@ -127,9 +178,9 @@
       }
     },
     {
-      "fieldName": "sex",
+      "fieldName": "birthTime",
       "fieldType": "String",
-      "fieldLabel": "Sex",
+      "fieldLabel": "Birth Time",
       "groups": [
         "demographics",
         "filter",
@@ -145,34 +196,11 @@
         "/browse-records"
       ],
       "validation": {
-        "required": true,
+        "required": false,
         "regex": "^(male|female)$",
-        "onErrorMessage": "Sex cannot be empty and should either be male, female or neutral"
+        "onErrorMessage": ""
       },
       "accessLevel": []
-    },
-    {
-      "fieldName": "chiefdomCode",
-      "fieldType": "String",
-      "fieldLabel": "Chiefdom Code",
-      "groups": [
-        "demographics",
-        "filter",
-        "linked_records",
-        "record_details"
-      ],
-      "scope": [
-        "/record-details/:uid",
-        "/notifications/match-details",
-        "/record-details/:uid/relink",
-        "/search/custom",
-        "/browse-records"
-      ],
-      "accessLevel": [],
-      "validation": {
-        "required": true,
-        "onErrorMessage": "Chiefdom Code cannot be empty"
-      }
     },
     {
       "fieldName": "cellPhone",
@@ -194,11 +222,12 @@
       "accessLevel": []
     },
     {
-      "fieldName": "pin",
+      "fieldName": "inkhundla",
       "fieldType": "String",
-      "fieldLabel": "PIN",
+      "fieldLabel": "Inkhundla",
       "groups": [
-        "identifiers",
+        "demographics",
+        "filter",
         "linked_records",
         "record_details"
       ],
@@ -206,17 +235,82 @@
         "/record-details/:uid",
         "/notifications/match-details",
         "/record-details/:uid/relink",
-        "/search/simple",
         "/search/custom",
-        "/search-results/golden",
-        "/search-results/patient",
         "/browse-records"
       ],
       "accessLevel": [],
       "validation": {
-        "required": true,
-        "regex": "",
-        "onErrorMessage": "The national Id cannot be empty"
+        "required": false,
+        "onErrorMessage": ""
+      }
+    },
+    {
+      "fieldName": "chiefdom",
+      "fieldType": "String",
+      "fieldLabel": "Chiefdom",
+      "groups": [
+        "demographics",
+        "filter",
+        "linked_records",
+        "record_details"
+      ],
+      "scope": [
+        "/record-details/:uid",
+        "/notifications/match-details",
+        "/record-details/:uid/relink",
+        "/search/custom",
+        "/browse-records"
+      ],
+      "accessLevel": [],
+      "validation": {
+        "required": false,
+        "onErrorMessage": ""
+      }
+    },
+    {
+      "fieldName": "nationality",
+      "fieldType": "String",
+      "fieldLabel": "Nationality",
+      "groups": [
+        "demographics",
+        "filter",
+        "linked_records",
+        "record_details"
+      ],
+      "scope": [
+        "/record-details/:uid",
+        "/notifications/match-details",
+        "/record-details/:uid/relink",
+        "/search/custom",
+        "/browse-records"
+      ],
+      "accessLevel": [],
+      "validation": {
+        "required": false,
+        "onErrorMessage": ""
+      }
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String",
+      "fieldLabel": "City",
+      "groups": [
+        "demographics",
+        "filter",
+        "linked_records",
+        "record_details"
+      ],
+      "scope": [
+        "/record-details/:uid",
+        "/notifications/match-details",
+        "/record-details/:uid/relink",
+        "/search/custom",
+        "/browse-records"
+      ],
+      "accessLevel": [],
+      "validation": {
+        "required": false,
+        "onErrorMessage": ""
       }
     }
   ],

@@ -10,13 +10,6 @@
       "source": {
         "csvCol": 0
       }
-    },
-    {
-      "fieldName": "aux_clinical_data",
-      "fieldType": "String",
-      "source": {
-        "csvCol": 11
-      }
     }
   ],
   "auxGoldenRecordFields": [
@@ -60,10 +53,19 @@
   ],
   "demographicFields": [
     {
-      "fieldName": "first_name",
+      "fieldName": "pin",
       "fieldType": "String",
       "source": {
         "csvCol": 1
+      },
+      "indexGoldenRecord": "@index(exact,trigram)",
+      "indexInteraction": "@index(exact,trigram)"
+    },
+    {
+      "fieldName": "first_name",
+      "fieldType": "String",
+      "source": {
+        "csvCol": 2
       },
       "indexGoldenRecord": "@index(exact,trigram)",
       "indexInteraction": "@index(exact,trigram)",
@@ -79,7 +81,7 @@
       "fieldName": "middle_name",
       "fieldType": "String",
       "source": {
-        "csvCol": 2
+        "csvCol": 3
       },
       "indexGoldenRecord": "@index(exact,trigram)",
       "indexInteraction": "@index(exact,trigram)",
@@ -95,7 +97,7 @@
       "fieldName": "surname",
       "fieldType": "String",
       "source": {
-        "csvCol": 3
+        "csvCol": 4
       },
       "indexGoldenRecord": "@index(exact,trigram)",
       "indexInteraction": "@index(exact,trigram)",
@@ -108,24 +110,10 @@
       }
     },
     {
-      "fieldName": "dob",
-      "fieldType": "String",
-      "source": {
-        "csvCol": 5
-      },
-      "linkMetaData": {
-        "comparison": "JARO_WINKLER_SIMILARITY",
-        "comparisonLevels": [
-          0.92
-        ],
-        "m":0.83510715,"u":5.832308E-5
-      }
-    },    
-    {
       "fieldName": "sex",
       "fieldType": "String",
       "source": {
-        "csvCol": 4
+        "csvCol": 5
       },
       "indexGoldenRecord": "@index(exact,trigram)",
       "linkMetaData": {
@@ -136,27 +124,32 @@
         "m":0.9246436,"u":0.46087846
       }
     },
-
     {
-      "fieldName": "chiefdom_code",
+      "fieldName": "dob",
       "fieldType": "String",
       "source": {
         "csvCol": 6
       },
-      "indexGoldenRecord": "@index(trigram)",
       "linkMetaData": {
         "comparison": "JARO_WINKLER_SIMILARITY",
         "comparisonLevels": [
           0.92
         ],
-        "m":0.99999905,"u":0.006147231
+        "m":0.83510715,"u":5.832308E-5
+      }
+    },  
+    {
+      "fieldName": "birth_time",
+      "fieldType": "String",
+      "source": {
+        "csvCol": 7
       }
     },
     {
       "fieldName": "cell_phone",
       "fieldType": "String",
       "source": {
-        "csvCol": 7
+        "csvCol": 8
       },
       "indexGoldenRecord": "@index(exact,trigram)",
       "linkMetaData": {
@@ -168,13 +161,48 @@
       }
     },
     {
-      "fieldName": "pin",
+      "fieldName": "inkhundla",
       "fieldType": "String",
       "source": {
-        "csvCol": 8
+        "csvCol": 9
       },
-      "indexGoldenRecord": "@index(exact,trigram)",
-      "indexInteraction": "@index(exact,trigram)"
+      "indexGoldenRecord": "@index(trigram)",
+      "linkMetaData": {
+        "comparison": "JARO_WINKLER_SIMILARITY",
+        "comparisonLevels": [
+          0.92
+        ],
+        "m":0.99999905,"u":0.006147231
+      }
+    },
+    {
+      "fieldName": "chiefdom",
+      "fieldType": "String",
+      "source": {
+        "csvCol": 10
+      },
+      "indexGoldenRecord": "@index(trigram)",
+      "linkMetaData": {
+        "comparison": "JARO_WINKLER_SIMILARITY",
+        "comparisonLevels": [
+          0.92
+        ],
+        "m":0.99999905,"u":0.006147231
+      }
+    },
+    {
+      "fieldName": "nationality",
+      "fieldType": "String",
+      "source": {
+        "csvCol": 11
+      }
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String",
+      "source": {
+        "csvCol": 12
+      }
     }
   ],
   "rules": {
@@ -184,7 +212,7 @@
           "vars": [
             "pin"
           ],
-          "text": "neq(pin,999999999999999) and neq(pin,111111111111111) and eq(pin)"
+          "text": "neq(pin,9999999999999) and neq(pin,1111111111111) and eq(pin)"
         }
       ],
       "probabilistic": [
@@ -206,10 +234,10 @@
         },
         {
           "vars": [
-            "chiefdom_code",
+            "chiefdom",
             "cell_phone"
           ],
-          "text": "match(chiefdom_code,1) and match(cell_phone,2)"
+          "text": "match(chiefdom,1) and match(cell_phone,2)"
         }
       ]
     }
