@@ -32,6 +32,7 @@
     "transforms.surname": "demographicData.surname",
     "transforms.sex": "demographicData.sex",
     "transforms.dob": "demographicData.dob",
+    "transforms.birthTime": "demographicData.birthTime",
     "transforms.cellPhone": "demographicData.cellPhone",
     "transforms.inkhundla": "demographicData.inkhundla",
     "transforms.chiefdom": "demographicData.chiefdom",
