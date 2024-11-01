@@ -34,6 +34,7 @@
     "ENABLE_JEMPI_GOLDEN_ID_UPDATE": "true",
     "CLICKHOUSE_HOST": "analytics-datastore-clickhouse",
     "CLICKHOUSE_PORT": "8123",
-    "PATIENT_PROFILE_FOR_STUB_PATIENT": ""
+    "PATIENT_PROFILE_FOR_STUB_PATIENT": "",
+    "KAFKA_JEMPI_AUDIT_TOPIC": "JeMPI-audit-trail"
   }
 }
