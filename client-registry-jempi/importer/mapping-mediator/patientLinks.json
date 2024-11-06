@@ -16,10 +16,10 @@
     "middleName": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.middleName) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.middleName : null",
     "surname": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.surname) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.surname : null",
     "city": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.city) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.city : null",
-    "identifierValue": "$exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId) and $exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId.patient) ? lookupRequests.jempiSearch.data.goldenRecord.sourceId.patient : null",
-    "identifierSystem": "$exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId) and $exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId.facility) ? lookupRequests.jempiSearch.data.goldenRecord.sourceId.facility : null",
-    "nationalId": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.nationalId) ? {'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.nationalId, 'system': constants.nidSystem} : null",
-    "phoneNumber": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.phoneNumber) ? {'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.phoneNumber, 'system': constants.phone} : null",
+    "mrValue": "$exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId) and $exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId.patient) ? lookupRequests.jempiSearch.data.goldenRecord.sourceId.patient : null",
+    "mrSystem": "$exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId) and $exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId.facility) ? lookupRequests.jempiSearch.data.goldenRecord.sourceId.facility : null",
+    "pin": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.pin) ? {'use': constants.pinUse, 'type': {'coding':[{'system': constants.identifierSystem, 'code': constants.pinCode, 'display': constants.pinDisplay}]}, 'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.pin, 'system': constants.nidSystem} : null",
+    "cellPhone": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.cellPhone) ? {'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.cellPhone, 'system': constants.phone} : null",
     "link": "$append([], $map(lookupRequests.jempiSearch.data.interactionsWithScore, function($v) {{'other': {'reference': 'Patient/' & $v.interaction.uid}, 'type': 'refer'}}))"
   },
   "inputMapping": {
@@ -31,16 +31,20 @@
     "transforms.firstName": "name[0].given[0]",
     "transforms.middleName": "name[0].given[1]",
     "transforms.city": "address[0].city",
-    "transforms.identifierSystem": "identifier[0].system",
-    "transforms.identifierValue": "identifier[0].value",
-    "transforms.nationalId": "identifier[]+",
-    "transforms.phoneNumber": "telecom[]+",
+    "transforms.mrSystem": "identifier[0].system",
+    "transforms.mrValue": "identifier[0].value",
+    "transforms.pin": "identifier[]+",
+    "transforms.cellPhone": "telecom[]+",
     "transforms.link": "link"
   },
   "constants": {
-    "nidSystem": "NationalID",
+    "nidSystem": "http://homeaffairs.sys",
     "resourceType": "Patient",
-    "phone": "phone"
+    "phone": "phone",
+    "pinUse": "official",
+    "identifierSystem": "http://localhost:3447/fhir/CodeSystem/SzPersonIdentificationsCS",
+    "pinCode": "PI",
+    "pinDisplay": "Personal ID Number"
   },
   "requests": {
     "lookup": {
