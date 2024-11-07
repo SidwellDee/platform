@@ -10,16 +10,19 @@
   },
   "inputTransforms": {
     "id": "lookupRequests.jempiSearch.data.goldenRecord.uid",
-    "sex": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.sex) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.sex : null",
-    "dob": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.dob) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.dob : null",
+    "pin": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.pin) ? {'use': constants.pinUse, 'type': {'coding':[{'system': constants.identifierSystem, 'code': constants.pinCode, 'display': constants.pinDisplay}]}, 'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.pin, 'system': constants.nidSystem} : null",
     "firstName": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.firstName) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.firstName : null",
     "middleName": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.middleName) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.middleName : null",
     "surname": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.surname) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.surname : null",
+    "sex": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.sex) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.sex : null",
+    "dob": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.dob) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.dob : null",
+    "cellPhone": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.cellPhone) ? {'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.cellPhone, 'system': constants.phone} : null",
+    "inkhundla": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.inkhundla) ? {'url': 'code', 'valueCodeableConcept':{'coding':[{'system': constants.inkhundlaSystem, 'code':'code', 'display': lookupRequests.jempiSearch.data.goldenRecord.demographicData.inkhundla}]}}",
+    "chiefdom": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.chiefdom) ? {'url': 'code', 'valueCodeableConcept':{'coding':[{'system': constants.chiefdomSystem, 'code':'code', 'display': lookupRequests.jempiSearch.data.goldenRecord.demographicData.chiefdom}]}}",
+    "nationality": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.nationality) ? {'extension': [{'url': 'code', 'valueCodeableConcept': {'coding': [{'system': constants.nationalitySystem, 'code': constants.nationalityCode, 'display': lookupRequests.jempiSearch.data.goldenRecord.demographicData.nationality}]}}]}",
     "city": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.city) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.city : null",
     "mrValue": "$exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId) and $exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId.patient) ? lookupRequests.jempiSearch.data.goldenRecord.sourceId.patient : null",
     "mrSystem": "$exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId) and $exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId.facility) ? lookupRequests.jempiSearch.data.goldenRecord.sourceId.facility : null",
-    "pin": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.pin) ? {'use': constants.pinUse, 'type': {'coding':[{'system': constants.identifierSystem, 'code': constants.pinCode, 'display': constants.pinDisplay}]}, 'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.pin, 'system': constants.nidSystem} : null",
-    "cellPhone": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.cellPhone) ? {'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.cellPhone, 'system': constants.phone} : null",
     "link": "$append([], $map(lookupRequests.jempiSearch.data.interactionsWithScore, function($v) {{'other': {'reference': 'Patient/' & $v.interaction.uid}, 'type': 'refer'}}))"
   },
   "inputMapping": {
@@ -35,6 +38,9 @@
     "transforms.mrValue": "identifier[0].value",
     "transforms.pin": "identifier[]+",
     "transforms.cellPhone": "telecom[]+",
+    "transforms.nationality": "extension[0]",
+    "transforms.inkhundla": "extension[1]",
+    "transforms.chiefdom": "extension[2]",
     "transforms.link": "link"
   },
   "constants": {
@@ -44,7 +50,11 @@
     "pinUse": "official",
     "identifierSystem": "http://localhost:3447/fhir/CodeSystem/SzPersonIdentificationsCS",
     "pinCode": "PI",
-    "pinDisplay": "Personal ID Number"
+    "pinDisplay": "Personal ID Number",
+    "nationalitySystem": "urn:iso:std:iso:3166",
+    "nationalityCode": "SWZ",
+    "inkhundlaSystem": "http://localhost:3447/fhir/CodeSystem/SzTinkhundlaCS",
+    "chiefdomSystem": "http://localhost:3447/fhir/CodeSystem/SzChiefdomCS"
   },
   "requests": {
     "lookup": {

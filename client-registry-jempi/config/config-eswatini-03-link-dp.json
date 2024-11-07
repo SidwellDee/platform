@@ -38,14 +38,14 @@
           "fieldName": "facility",
           "fieldType": "String",
           "source": {
-            "csvCol": 9
+            "csvCol": 12
           }
         },
         {
           "fieldName": "patient",
           "fieldType": "String",
           "source": {
-            "csvCol": 10
+            "csvCol": 13
           }
         }
       ]
@@ -140,16 +140,13 @@
     },  
     {
       "fieldName": "birth_time",
-      "fieldType": "String",
-      "source": {
-        "csvCol": 7
-      }
+      "fieldType": "String"
     },
     {
       "fieldName": "cell_phone",
       "fieldType": "String",
       "source": {
-        "csvCol": 8
+        "csvCol": 7
       },
       "indexGoldenRecord": "@index(exact,trigram)",
       "linkMetaData": {
@@ -164,7 +161,7 @@
       "fieldName": "inkhundla",
       "fieldType": "String",
       "source": {
-        "csvCol": 9
+        "csvCol": 8
       },
       "indexGoldenRecord": "@index(trigram)",
       "linkMetaData": {
@@ -179,7 +176,7 @@
       "fieldName": "chiefdom",
       "fieldType": "String",
       "source": {
-        "csvCol": 10
+        "csvCol": 9
       },
       "indexGoldenRecord": "@index(trigram)",
       "linkMetaData": {
@@ -191,17 +188,17 @@
       }
     },
     {
+      "fieldName": "city",
+      "fieldType": "String",
+      "source": {
+        "csvCol": 10
+      }
+    },
+    {
       "fieldName": "nationality",
       "fieldType": "String",
       "source": {
         "csvCol": 11
-      }
-    },
-    {
-      "fieldName": "city",
-      "fieldType": "String",
-      "source": {
-        "csvCol": 12
       }
     }
   ],

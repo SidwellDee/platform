@@ -268,9 +268,9 @@
       }
     },
     {
-      "fieldName": "nationality",
+      "fieldName": "city",
       "fieldType": "String",
-      "fieldLabel": "Nationality",
+      "fieldLabel": "City",
       "groups": [
         "demographics",
         "filter",
@@ -291,9 +291,9 @@
       }
     },
     {
-      "fieldName": "city",
+      "fieldName": "nationality",
       "fieldType": "String",
-      "fieldLabel": "City",
+      "fieldLabel": "Nationality",
       "groups": [
         "demographics",
         "filter",
