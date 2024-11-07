@@ -1,24 +1,6 @@
 {
   "fields": [
     {
-      "fieldName": "auxId",
-      "fieldType": "String",
-      "fieldLabel": "AUX ID",
-      "groups": [
-        "identifiers",
-        "record_details"
-      ],
-      "scope": [
-        "/patient-record/:uid",
-        "/golden-record/:uid",
-        "/record-details/:uid",
-        "/search/custom",
-        "/browse-records"
-      ],
-      "readOnly": true,
-      "accessLevel": []
-    },
-    {
       "fieldName": "pin",
       "fieldType": "String",
       "fieldLabel": "PIN",
