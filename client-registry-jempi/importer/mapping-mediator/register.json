@@ -21,6 +21,7 @@
     "transforms.id": "id",
     "requestBody.identifier": "identifier",
     "constants.active": "active",
+    "requestBody._extensions": "_extensions",
     "requestBody.name": "name",
     "requestBody.gender": "gender",
     "requestBody.birthDate": "birthDate",
