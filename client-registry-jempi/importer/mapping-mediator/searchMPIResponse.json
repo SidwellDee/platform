@@ -1,0 +1,30 @@
+{
+    "name": "Search MPI response",
+    "endpoint": {
+      "pattern": "/search-mpi-all",
+      "method": "GET"
+    },
+    "transformation": {
+      "output": "JSON"
+    },
+    "inputTransforms": {
+      "operands": "($transform := function($v) {[query.family ? {'operator': 'and', 'operand': {'fn': 'eq', 'name': 'surname', 'value': query.family}},query.given ? {'operator': 'and', 'operand': {'fn': 'eq', 'name': 'firstName', 'value': query.given}},query.gender ? {'operator': 'and', 'operand': {'fn': 'eq', 'name': 'sex', 'value': query.gender}},query.birthDate ? {'operator': 'and', 'operand': {'fn': 'eq', 'name': 'dob', 'value': query.birthDate}},query.address ? {'operator': 'and', 'operand': {'fn': 'eq', 'name': 'city', 'value': query.address}},query.telecom ? {'operator': 'and', 'operand': {'fn': 'eq', 'name': 'cellPhone', 'value': query.telecom}},query.identifier ? {'operator': 'and', 'operand': {'fn': 'eq', 'name': 'pin', 'value': query.identifier}}]};$transform(query))"
+    },
+    "inputMapping": {
+      "transforms.operands": "operands",
+      "transforms.operands[0].operand": "operand"
+    },
+    "requests": {
+      "response": [
+        {
+          "id": "jempiSearchAllResponse",
+          "forwardExistingRequestBody": true,
+          "config": {
+            "method": "post",
+            "url": "http://jempi-api:50000/JeMPI/crFind"
+          }
+        }
+      ]
+    }
+  }
+  

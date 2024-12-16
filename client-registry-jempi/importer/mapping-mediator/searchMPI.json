@@ -1,7 +1,7 @@
 {
-  "name": "Search Endpoint deterministic",
+  "name": "Search MPI Endpoint",
   "endpoint": {
-    "pattern": "/fhir/Patient",
+    "pattern": "/mpi",
     "method": "GET"
   },
   "transformation": {
@@ -9,7 +9,7 @@
   },
   "inputTransforms": {
     "total": "$count(lookupRequests.jempiSearchAll.data.goldenRecords)",
-    "entry": "$append([], $map(lookupRequests.jempiSearchAll.data.goldenRecords, function($v) {{'fullUrl': 'Patient/' & $v.uid, 'resource': {'resourceType': 'Patient','id': $v.uid,'name': {'given': [$v.demographicData.firstName],'family': $v.demographicData.surname},'address': [{'city': $v.demographicData.city}],'birthDate': $v.demographicData.dob,'telecom': [{'value': $v.demographicData.phoneNumber,'system': 'phone'}],'identifier': [{'system': $v.sourceId.facility,'value': $v.sourceId.patient},{'system': 'NationalID','value': $v.demographicData.pin}],'gender': $v.demographicData.sex}}}))"
+    "entry": "$append([], $map(lookupRequests.jempiSearchAll.data.goldenRecords, function($v) {{'fullUrl': 'Patient/' & $v.uid, 'resource': {'resourceType': 'Patient','id': $v.uid,'name': {'given': [$v.demographicData.firstName,$v.demographicData.middleName],'family': $v.demographicData.surname},'address': [{'city': $v.demographicData.city}],'birthDate': $v.demographicData.dob,'telecom': [{'value': $v.demographicData.phoneNumber,'system': 'phone'}],'identifier': [{'use':'official','type':{'coding':[{'system':'http://192.168.10.200:3447/fhir/CodeSystem/SzPersonIdentificationsCS','code':'PI','display':'Personal ID Number'}]},'system': 'CIVIL','value': $v.demographicData.pin}],'gender': $v.demographicData.sex,'extension':[{'url':'code','valueCodeableConcept':{'coding':[{'system':'http://localhost:3447/fhir/CodeSystem/SzTinkhundlaCS','code': $v.demographicData.inkhundla,'display':$v.demographicData.inkhundla}],'text':$v.demographicData.inkhundla}},{'url':'code','valueCodeableConcept':{'coding':[{'system':'http://localhost:3447/fhir/CodeSystem/SzChiefdomCS','code': $v.demographicData.chiefdom,'display':$v.demographicData.chiefdom}],'text':$v.demographicData.chiefdom}}]}}}))"
   },
   "inputMapping": {
     "constants.resourceType": "resourceType",
@@ -55,7 +55,7 @@
               }
             }
           },
-          "url": "http://openhim-mapping-mediator:3003/search-response-all"
+          "url": "http://openhim-mapping-mediator:3003/search-mpi-all"
         }
       }
     ]

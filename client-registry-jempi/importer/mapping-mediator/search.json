@@ -10,15 +10,16 @@
   },
   "inputTransforms": {
     "id": "lookupRequests.jempiSearch.data.goldenRecord.uid",
-    "gender": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.gender) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.gender : null",
+    "pin": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.pin) ? {'use': 'usual', 'type': {'coding': [{'system':'http://192.168.10.200:3447/fhir/CodeSystem/SzPersonIdentificationsCS','code':'PI','display':'Personal ID Number'}]},'system':'http://homeaffairs.sys','value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.pin}",
+    "gender": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.sex) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.sex : null",
     "birthDate": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.dob) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.dob : null",
-    "name": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.givenName) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.givenName : null",
-    "lastName": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.familyName) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.familyName : null",
+    "firstName": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.firstName) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.firstName : null",
+    "middleName": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.middleName) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.middleName : null",
+    "lastName": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.surname) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.surname : null",
     "city": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.city) ? lookupRequests.jempiSearch.data.goldenRecord.demographicData.city : null",
-    "identifierValue": "$exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId) and $exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId.patient) ? lookupRequests.jempiSearch.data.goldenRecord.sourceId.patient : null",
+    "identifierValue": "$exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId) and $exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId.patientId) ? lookupRequests.jempiSearch.data.goldenRecord.sourceId.patientId : null",
     "identifierSystem": "$exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId) and $exists(lookupRequests.jempiSearch.data.goldenRecord.sourceId.facility) ? lookupRequests.jempiSearch.data.goldenRecord.sourceId.facility : null",
-    "nationalId": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.nationalId) ? {'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.nationalId, 'system': constants.nidSystem} : null",
-    "phoneNumber": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.phoneNumber) ? {'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.phoneNumber, 'system': constants.phone} : null",
+    "phoneNumber": "$exists(lookupRequests.jempiSearch.data.goldenRecord.demographicData.cellPhone) ? {'value': lookupRequests.jempiSearch.data.goldenRecord.demographicData.cellPhone, 'system': constants.phone} : null",
     "link": "$append([], $map(lookupRequests.jempiSearch.data.interactionsWithScore, function($v) {{'other': {'reference': 'Patient/' & $v.interaction.uid}, 'type': 'refer'}}))"
   },
   "inputMapping": {
@@ -28,15 +29,16 @@
     "transforms.birthDate": "birthDate",
     "transforms.lastName": "name[0].family",
     "transforms.name": "name[0].given[0]",
+    "transforms.middleName": "name[0].given[1]",
     "transforms.city": "address[0].city",
     "transforms.identifierSystem": "identifier[0].system",
     "transforms.identifierValue": "identifier[0].value",
-    "transforms.nationalId": "identifier[]+",
+    "transforms.pin": "identifier[0]",
     "transforms.phoneNumber": "telecom[]+",
     "transforms.link": "link"
   },
   "constants": {
-    "nidSystem": "NationalID",
+    "nidSystem": "http://homeaffairs.sys",
     "resourceType": "Patient",
     "phone": "phone"
   },
