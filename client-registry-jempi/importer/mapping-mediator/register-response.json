@@ -10,8 +10,8 @@
   },
   "inputTransforms": {
     "currentDate": "$now()",
-    "sourcePatient": "$exists(requestBody.identifier) and $exists(requestBody.identifier[0]) and $exists(requestBody.identifier[0].value) ? {'patient': requestBody.identifier[0].value, 'facility': requestBody.identifier[0].system} : null",
-    "pin": "$exists(requestBody.identifier) and $exists(requestBody.identifier[0]) and $count($filter(requestBody.identifier, function($v) {$contains($v.system, 'http://homeaffairs.sys')})) > 0 ? $filter(requestBody.identifier, function($v) {$contains($v.system, 'http://homeaffairs.sys')})[0].value : null",
+    "sourcePatient": "$exists(requestBody.identifier) and $count($filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:health')})) > 0 ? {'patient': $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:health')})[0].value, 'facility': $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:health')})[0].system} : null",
+    "pin": "$exists(requestBody.identifier) and $count($filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:homeaffairs:population-register')})) > 0 ? $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:homeaffairs:population-register')})[0].value : null",
     "firstName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].given[0]) ? requestBody.name[0].given[0] : null",
     "middleName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].given[1]) ? requestBody.name[0].given[1] : null",
     "surname": "$exists(requestBody.name) and $exists(requestBody.name[0]) ? requestBody.name[0].family : null",
@@ -19,9 +19,9 @@
     "dob": "$exists(requestBody.birthDate) ? requestBody.birthDate : null",
     "birthTime": "$exists(requestBody._birthDate) and $exists(requestBody._birthDate.extension) and $exists(requestBody._birthDate.extension[0]) and $exists(requestBody._birthDate.extension[0].valueDateTime) ? requestBody._birthDate.extension[0].valueDateTime : null",
     "cellPhone": "$exists(requestBody.telecom) and $count($filter(requestBody.telecom, function($v) {$contains($v.system, 'phone')})) > 0 ? $filter(requestBody.telecom, function($v) {$contains($v.system, 'phone')}).value : null",
-    "inkhundla": "$exists(requestBody._extensions) and $exists(requestBody._extensions.extension) and $exists(requestBody._extensions.extension[1]) ? requestBody._extensions.extension[1].valueCodeableConcept.text : null",
-    "chiefdom": "$exists(requestBody._extensions) and $exists(requestBody._extensions.extension) and $exists(requestBody._extensions.extension[2]) ? requestBody._extensions.extension[2].valueCodeableConcept.text : null",
-    "nationality": "$exists(requestBody._extensions) and $exists(requestBody._extensions.extension) and $exists(requestBody._extensions.extension[0].extension) and $exists(requestBody._extensions.extension[0].extension[0]) and $exists(requestBody._extensions.extension[0].extension[0].valueCodeableConcept) and $exists(requestBody._extensions.extension[0].extension[0].valueCodeableConcept.coding[0])and $exists(requestBody._extensions.extension[0].extension[0].valueCodeableConcept.coding[0].display) ? requestBody._extensions.extension[0].extension[0].valueCodeableConcept.coding[0].display : null",
+    "inkhundla": "$exists(requestBody.extension) and $count($filter(requestBody.extension, function($v) {$contains($v.url, '/fhir/StructureDefinition/SzInkhundlaExtension')})) > 0 ? $filter(requestBody.extension, function($v) {$contains($v.url, '/fhir/StructureDefinition/SzInkhundlaExtension')})[0].valueCodeableConcept.text : null",
+    "chiefdom": "$exists(requestBody.extension) and $count($filter(requestBody.extension, function($v) {$contains($v.url, '/fhir/StructureDefinition/SzChiefdomExtension')})) > 0 ? $filter(requestBody.extension, function($v) {$contains($v.url, '/fhir/StructureDefinition/SzChiefdomExtension')})[0].valueCodeableConcept.text : null",
+    "nationality": "$exists(requestBody.extension) and $count($filter(requestBody.extension, function($v) {$contains($v.url, 'http://hl7.org/fhir/StructureDefinition/patient-nationality')})) > 0 ? $filter(requestBody.extension, function($v) {$contains($v.url, 'http://hl7.org/fhir/StructureDefinition/patient-nationality')})[0].valueCodeableConcept.coding[0].display : null",
     "city": "$exists(requestBody.address) and $exists(requestBody.address[0]) and $exists(requestBody.address[0].city) ? requestBody.address[0].city : null"
   },
   "inputMapping": {
