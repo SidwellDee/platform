@@ -9,23 +9,25 @@
     "output": "JSON"
   },
   "inputTransforms": {
-    "familyName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].family) ? {'name': 'familyName', 'value': requestBody.name[0].family} : null",
-    "givenName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].given) and $exists(requestBody.name[0].given[0]) ? {'name': 'givenName', 'value': requestBody.name[0].given[0]} : null",
+    "lastName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].family) ? {'name': 'familyName', 'value': requestBody.name[0].family} : null",
+    "firstName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].given) and $exists(requestBody.name[0].given[0]) ? {'name': 'givenName', 'value': requestBody.name[0].given[0]} : null",
     "birthDate": "$exists(requestBody.birthDate) ? {'name': 'dob', 'value': requestBody.birthDate} : null",
-    "gender": "$exists(requestBody.gender) ? {'name': 'gender', 'value': requestBody.gender} : null",
+    "sex": "$exists(requestBody.gender) ? {'name': 'gender', 'value': requestBody.gender} : null",
     "city": "$exists(requestBody.address) and $exists(requestBody.address[0]) and $exists(requestBody.address[0].city) ? {'name': 'city', 'value': requestBody.address[0].city} : null",
     "phoneNumber": "$exists(requestBody.telecom) and $exists(requestBody.telecom[0]) and $exists(requestBody.telecom[0].value) ? {'name': 'phoneNumber', 'value': requestBody.telecom[0].value} : null",
-    "nationalId": "$exists(requestBody.identifier) and $exists(requestBody.identifier[0]) and $count($filter(requestBody.identifier, function($v) {$contains($v.system, 'NationalID')})) > 0 ? {'name': 'nationalId', 'value': $filter(requestBody.identifier, function($v) {$contains($v.system, 'NationalID')})[0].value} : null"
+    "pin": "$exists(requestBody.identifier) and $exists(requestBody.identifier[0]) and $count($filter(requestBody.identifier, function($v) {$contains($v.system, 'NationalID')})) > 0 ? {'name': 'nationalId', 'value': $filter(requestBody.identifier, function($v) {$contains($v.system, 'NationalID')})[0].value} : null",
+    "nationality": "$exists(requestBody.extension) and $count($filter(requestBody.extension, function($v) {$contains($v.url, 'http://hl7.org/fhir/StructureDefinition/patient-nationality')})) > 0 ? $filter(requestBody.extension, function($v) {$contains($v.url, 'http://hl7.org/fhir/StructureDefinition/patient-nationality')})[0].valueCodeableConcept.coding[0].display : null"
   },
   "inputMapping": {
     "urlParams.patientId": "goldenId",
-    "transforms.familyName": "fields[]+",
-    "transforms.givenName": "fields[]+",
+    "transforms.lastName": "fields[]+",
+    "transforms.firstName": "fields[]+",
     "transforms.birthDate": "fields[]+",
-    "transforms.gender": "fields[]+",
+    "transforms.sex": "fields[]+",
     "transforms.city": "fields[]+",
     "transforms.phoneNumber": "fields[]+",
-    "transforms.nationalId": "fields[]+"
+    "transforms.pin": "fields[]+",
+    "transforms.nationality": "fields[]+"
   },
   "requests": {
     "response": {

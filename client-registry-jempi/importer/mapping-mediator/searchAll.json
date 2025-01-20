@@ -9,7 +9,7 @@
   },
   "inputTransforms": {
     "total": "$count(lookupRequests.jempiSearchAll.data.goldenRecords)",
-    "entry": "$append([], $map(lookupRequests.jempiSearchAll.data.goldenRecords, function($v) {{'fullUrl': 'Patient/' & $v.uid, 'resource': {'resourceType': 'Patient','id': $v.uid,'name': {'given': [$v.demographicData.firstName],'family': $v.demographicData.surname},'address': [{'city': $v.demographicData.city}],'birthDate': $v.demographicData.dob,'telecom': [{'value': $v.demographicData.phoneNumber,'system': 'phone'}],'identifier': [{'system': $v.sourceId.facility,'value': $v.sourceId.patient},{'system': 'NationalID','value': $v.demographicData.pin}],'gender': $v.demographicData.sex}}}))"
+    "entry": "$append([], $map(lookupRequests.jempiSearchAll.data.goldenRecords, function($v) {{'fullUrl': 'Patient/' & $v.uid, 'resource': {'resourceType': 'Patient','id': $v.uid,'name': [{'given': [$v.demographicData.firstName,$v.demographicData.middleName],'family': $v.demographicData.surname}],'address': [{'city': $v.demographicData.city}],'birthDate': $v.demographicData.dob,'telecom': [{'value': $v.demographicData.cellPhone,'system': 'phone'}],'identifier': [{'use':'official','type':{'coding':[{'system':'http://localhost:3447/fhir/CodeSystem/SzPersonIdentificationsCS','code':'PI','display':'Personal ID Number'}]},'system': 'urn:homeaffairs:population-register','value': $v.demographicData.pin}],'gender': $v.demographicData.sex}}}))"
   },
   "inputMapping": {
     "constants.resourceType": "resourceType",

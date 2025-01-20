@@ -12,9 +12,11 @@
       "urlParams.patientId": "id",
       "requestBody.resourceType": "resourceType",
       "requestBody.identifier": "identifier",
+      "requestBody.extension": "extension",
       "requestBody.name": "name",
       "requestBody.gender": "gender",
       "requestBody.birthDate": "birthDate",
+      "requestBody._birthDate": "_birthDate",
       "requestBody.address": "address",
       "requestBody.telecom": "telecom"
     },
