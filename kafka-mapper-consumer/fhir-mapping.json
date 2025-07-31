@@ -3,19 +3,110 @@
     "resourceType": "Patient",
     "tableMappings": [
       {
-        "targetTable": "patient_example",
+        "targetTable": "Patient",
+        
         "columnMappings": [
           {
             "columnName": "goldenId",
             "fhirPath": "Patient.link.where(type='refer').other.reference.replace('Patient/', '')"
           },
           {
-            "columnName": "patientGivenName",
+            "columnName": "sourceSystem",
+            "fhirPath": "Patient.identifier.where(use='usual').system"
+          },
+          {
+            "columnName": "pin",
+            "fhirPath": "Patient.identifier.where(system='urn:homeaffairs:population-register').value"
+          },
+          {
+            "columnName": "firstName",
             "fhirPath": "Patient.name.given"
           },
           {
-            "columnName": "patientFamilyName",
+            "columnName": "lastName",
             "fhirPath": "Patient.name.family"
+          },
+          {
+            "columnName": "dateOfBirth",
+            "fhirPath": "Patient.birthDate"
+          },
+          {
+            "columnName": "gender",
+            "fhirPath": "Patient.gender"
+          },
+          {
+            "columnName": "nationality",
+            "fhirPath": "Patient.extension.where(url='http://hl7.org/fhir/StructureDefinition/patient-nationality').valueCodeableConcept.coding.where(system='urn:iso:std:iso:3166').display"
+          },
+          {
+            "columnName": "inkhundla",
+            "fhirPath": "Patient.extension.where(url='http://172.209.216.154:5001/fhir/StructureDefinition/SzInkhundlaExtension').valueCodeableConcept.text"
+          },
+          {
+            "columnName": "chiefdom",
+            "fhirPath": "Patient.extension.where(url='http://172.209.216.154:5001/fhir/StructureDefinition/SzChiefdomExtension').valueCodeableConcept.text"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resourceType": "Encounter",
+    "tableMappings": [
+      {
+        "targetTable": "Encounter",
+        "columnMappings": [
+          {
+            "columnName": "id",
+            "fhirPath": "Encounter.id"
+          },
+          {
+            "columnName": "status",
+            "fhirPath": "Encounter.status"
+          },
+          {
+            "columnName": "class_system",
+            "fhirPath": "Encounter.class.system"
+          },
+          {
+            "columnName": "class_code",
+            "fhirPath": "Encounter.class.code"
+          },
+          {
+            "columnName": "class_display",
+            "fhirPath": "Encounter.class.display"
+          },
+          {
+            "columnName": "patient_id",
+            "fhirPath": "Encounter.subject.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "practitioner_id",
+            "fhirPath": "Encounter.participant[0].individual.reference.replace('Practitioner/', '')"
+          },
+          {
+            "columnName": "period_start",
+            "fhirPath": "Encounter.period.start"
+          },
+          {
+            "columnName": "period_end",
+            "fhirPath": "Encounter.period.end"
+          },
+          {
+            "columnName": "reason_code_system",
+            "fhirPath": "Encounter.reasonCode[0].coding[0].system"
+          },
+          {
+            "columnName": "reason_code",
+            "fhirPath": "Encounter.reasonCode[0].coding[0].code"
+          },
+          {
+            "columnName": "reason_code_display",
+            "fhirPath": "Encounter.reasonCode[0].coding[0].display"
+          },
+          {
+            "columnName": "location_id",
+            "fhirPath": "Encounter.location[0].location.reference.replace('Location/', '')"
           }
         ]
       }
