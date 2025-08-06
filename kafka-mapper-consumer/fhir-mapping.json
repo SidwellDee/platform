@@ -116,15 +116,251 @@
     "resourceType": "Observation",
     "tableMappings": [
       {
-        "targetTable": "observation_example",
+        "targetTable":"Observation",
         "columnMappings": [
           {
-            "columnName": "observationValue",
+            "columnName": "id",
+            "fhirPath": "Observation.id"
+          },
+          {
+            "columnName": "status",
+            "fhirPath": "Observation.status"
+          },
+          {
+            "columnName": "category_system",
+            "fhirPath": "Observation.category[0].coding[0].system"
+          },
+          {
+            "columnName": "category_code",
+            "fhirPath": "Observation.category[0].coding[0].code"
+          },
+          {
+            "columnName": "code_system",
+            "fhirPath": "Observation.code.coding[0].system"
+          },
+          {
+            "columnName": "code_code",
+            "fhirPath": "Observation.code.coding[0].code"
+          },
+          {
+            "columnName": "code_display",
+            "fhirPath": "Observation.code.coding[0].display"
+          },
+          {
+            "columnName": "code_text",
+            "fhirPath": "Observation.code.coding[0].text"
+          },
+          {
+            "columnName": "subject_reference",
+            "fhirPath": "Observation.subject.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "encounter_reference",
+            "fhirPath": "Observation.encounter.reference.replace('Encounter/', '')"
+          },
+          {
+            "columnName": "practitioner_reference",
+            "fhirPath": "Observation.performer[0].reference.replace('Practitioner/', '')"
+          },
+          {
+            "columnName": "value_quantity_value",
             "fhirPath": "Observation.valueQuantity.value"
           },
           {
-            "columnName": "patientId",
-            "fhirPath": "Observation.subject.reference.replace('Patient/', '')"
+            "columnName": "value_quantity_unit",
+            "fhirPath": "Observation.valueQuantity.unit"
+          },
+          {
+            "columnName": "value_code",
+            "fhirPath": "Observation.valueCodeableConcept.coding[0].code"
+          },
+          {
+            "columnName": "value_display",
+            "fhirPath": "Observation.valueCodeableConcept.coding[0].display"
+          },
+          {
+            "columnName": "value_string",
+            "fhirPath": "Observation.valueString"
+          },
+          {
+            "columnName": "value_boolean",
+            "fhirPath": "Observation.valueBoolean"
+          },
+          {
+            "columnName": "value_integer",
+            "fhirPath": "Observation.valueInteger"
+          },
+          {
+            "columnName": "value_range_low",
+            "fhirPath": "Observation.valueRange.low.value"
+          },
+          {
+            "columnName": "value_range_high",
+            "fhirPath": "Observation.valueRange.high.value"
+          },
+          {
+            "columnName": "value_ratio_num",
+            "fhirPath": "Observation.valueRatio.numerator.value"
+          },
+          {
+            "columnName": "value_ratio_den",
+            "fhirPath": "Observation.valueRatio.denominator.value"
+          },
+          {
+            "columnName": "value_sampled_data",
+            "fhirPath": "Observation.valueSampledData"
+          },
+          {
+            "columnName": "value_time",
+            "fhirPath": "Observation.valueTime"
+          },
+          {
+            "columnName": "value_datetime",
+            "fhirPath": "Observation.valueDateTime"
+          },
+          {
+            "columnName": "value_period_start",
+            "fhirPath": "Observation.valuePeriodStart"
+          },
+          {
+            "columnName": "value_period_end",
+            "fhirPath": "Observation.valuePeriodEnd"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resourceType": "DiagnosticReport",
+    "tableMappings": [
+      {
+        "targetTable":"DiagnosticReport",
+        "columnMappings": [
+          {
+            "columnName": "id",
+            "fhirPath": "DiagnosticReport.id"
+          },
+          {
+            "columnName": "status",
+            "fhirPath": "DiagnosticReport.status"
+          },
+          {
+            "columnName": "code_code",
+            "fhirPath": "DiagnosticReport.code.coding[0].code"
+          },
+          {
+            "columnName": "code_display",
+            "fhirPath": "DiagnosticReport.code.coding[0].display"
+          },
+          {
+            "columnName": "subject_reference",
+            "fhirPath": "DiagnosticReport.subject.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "encounter_reference",
+            "fhirPath": "DiagnosticReport.encounter.reference.replace('Encounter/', '')"
+          },
+          {
+            "columnName": "performer_reference",
+            "fhirPath": "DiagnosticReport.performer[0].reference.replace('Practitioner/', '')"
+          },
+          {
+            "columnName": "specimen_reference",
+            "fhirPath": "DiagnosticReport.specimen[0].reference.replace('Specimen/', '')"
+          },
+          {
+            "columnName": "effective_datetime",
+            "fhirPath": "DiagnosticReport.effectiveDateTime"
+          },
+          {
+            "columnName": "issued",
+            "fhirPath": "DiagnosticReport.issued"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resourceType": "MedicationRequest",
+    "tableMappings": [
+      {
+        "targetTables": "MedicationRequest",
+        "columnMappings": [
+          {
+            "columnName": "id",
+            "fhirPath": "MedicationRequest.id"
+          },
+          {
+            "columnName": "status",
+            "fhirPath": "MedicationRequest.status"
+          },
+          {
+            "columnName": "intent",
+            "fhirPath": "MedicationRequest.intent"
+          },
+          {
+            "columnName": "medication_code",
+            "fhirPath": "MedicationRequest.medicationCodeableConcept.coding[0].code"
+          },
+          {
+            "columnName": "medication_display",
+            "fhirPath": "MedicationRequest.medicationCodeableConcept.coding[0].display"
+          },
+          {
+            "columnName": "subject_reference",
+            "fhirPath": "MedicationRequest.subject.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "encounter_reference",
+            "fhirPath": "MedicationRequest.encounter.reference.replace('Encounter/', '')"
+          },
+          {
+            "columnName": "authored_on",
+            "fhirPath": "MedicationRequest.authoredOn"
+          },
+          {
+            "columnName": "requester_reference",
+            "fhirPath": "MedicationRequest.requester.reference.replace('Practitioner/', '')"
+          },
+          {
+            "columnName": "dosage_instruction_text",
+            "fhirPath": "MedicationRequest.dosageInstruction.text"
+          },
+          {
+            "columnName": "dosage_instruction_timing_repeat_frequency",
+            "fhirPath": "MedicationRequest.dosageInstruction.timing.repeat.frequency"
+          },
+          {
+            "columnName": "dosage_instruction_timing_repeat_period",
+            "fhirPath": "MedicationRequest.dosageInstruction.timing.repeat.period"
+          },
+          {
+            "columnName": "dosage_instruction_timing_repeat_period_unit",
+            "fhirPath": "MedicationRequest.dosageInstruction.timing.repeat.periodUnit"
+          },
+          {
+            "columnName": "dosage_instruction_timing_repeat_period_unit",
+            "fhirPath": "MedicationRequest.dosageInstruction.timing.repeat.periodUnit"
+          },
+          {
+            "columnName": "dosage_instruction_route_code",
+            "fhirPath": "MedicationRequest.dosageInstruction.route.coding[0].code"
+          },
+          {
+            "columnName": "dosage_instruction_route_display",
+            "fhirPath": "MedicationRequest.dosageInstruction.route.coding[0].display"
+          },
+          {
+            "columnName": "substitution_allowed",
+            "fhirPath": "MedicationRequest.allowedBoolean"
+          },
+          {
+            "columnName": "substitution_reason_code",
+            "fhirPath": "MedicationRequest.reasonCode.coding[0].code"
+          },
+          {
+            "columnName": "substitution_reason_display",
+            "fhirPath": "MedicationRequest.reasonCode.coding[0].display"
           }
         ]
       }
