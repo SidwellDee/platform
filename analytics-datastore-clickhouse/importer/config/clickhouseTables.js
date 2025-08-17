@@ -3,7 +3,7 @@ const CLUSTERED_MODE = process.env.CLUSTERED_MODE || "false";
 const queries =
 	CLUSTERED_MODE === "true"
 		? [
-			`CREATE TABLE Patient ON CLUSTER '{cluster}' (
+			`CREATE TABLE patient ON CLUSTER '{cluster}' (
 				id 						String,						-- Patient.id
 				version 				String NULL,
 				inserted_at 			DateTime DEFAULT now(),
@@ -18,7 +18,7 @@ const queries =
 				chiefdom 				String						-- Patient.extension.chiefdom
 			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
 			ORDER BY tuple();`,
-			`CREATE TABLE Encounter(
+			`CREATE TABLE encounter(
 				id String,				  					  			
 				version String NULL,			  						
 				inserted_at DateTime DEFAULT now(),					
@@ -39,7 +39,7 @@ const queries =
 				hospitalization_discharge_disp_code String
 			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
 			ORDER BY tuple(inserted_at);`,
-			`CREATE TABLE Observation (
+			`CREATE TABLE observation (
 				id 							    String,
 				version 					    String NULL,			  						
 				inserted_at 				    DateTime DEFAULT now(),					
@@ -73,7 +73,7 @@ const queries =
 				value_period_end 			    DateTime NULL,  
 			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
 			ORDER BY tuple(inserted_at);`,
-			`CREATE TABLE DiagnosticReport
+			`CREATE TABLE diagnostic_report
 			(
 				id                      String, 
 				version 			    String NULL,			  						
@@ -95,7 +95,7 @@ const queries =
 				presented_form          String
 			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
 			ORDER BY (inserted_at);`,
-			`CREATE TABLE MedicationRequest (
+			`CREATE TABLE medication_request (
 				id                                              String,
 				version 					                    String NULL,			  						
 				inserted_at 				                    DateTime DEFAULT now(),					
@@ -123,7 +123,7 @@ const queries =
 				substitution_reason_display                     String
 			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
 			ORDER BY inserted_at;`,
-			`CREATE TABLE ServiceRequest (
+			`CREATE TABLE service_request (
 				id                                              String,
 				version 					                    String NULL,			  						
 				inserted_at 				                    DateTime DEFAULT now(),					
@@ -147,7 +147,7 @@ const queries =
 			ORDER BY inserted_at;`
 		]
 		: [
-			`CREATE TABLE Patient(
+			`CREATE TABLE patient(
 				id 						String,						
 				version 				String NULL,
 				inserted_at 			DateTime DEFAULT now(),
@@ -163,7 +163,7 @@ const queries =
 			) 
 			ENGINE=MergeTree
 			ORDER BY tuple();`,
-			`CREATE TABLE Encounter(
+			`CREATE TABLE encounter(
 				id String,				  					  			
 				version String NULL,			  						
 				inserted_at DateTime DEFAULT now(),					
@@ -186,7 +186,7 @@ const queries =
 			ENGINE = MergeTree
 			ORDER BY tuple(inserted_at);
 			`,
-			`CREATE TABLE Observation (
+			`CREATE TABLE observation (
 				id 							    String,
 				version 					    String NULL,			  						
 				inserted_at 				    DateTime DEFAULT now(),					
@@ -220,7 +220,7 @@ const queries =
 				value_period_end 			    DateTime NULL,    
 			) ENGINE = MergeTree
 			ORDER BY tuple(inserted_at);`,
-			`CREATE TABLE DiagnosticReport
+			`CREATE TABLE diagnostic_report
 			(
 				id                      String, 
 				version 			    String NULL,			  						
@@ -243,7 +243,7 @@ const queries =
 			)
 			ENGINE = MergeTree
 			ORDER BY (inserted_at);`,
-			`CREATE TABLE MedicationRequest (
+			`CREATE TABLE medication_request (
 				id                                              String,
 				version 					                    String NULL,			  						
 				inserted_at 				                    DateTime DEFAULT now(),					
@@ -271,7 +271,7 @@ const queries =
 				substitution_reason_display                     String
 			) ENGINE = MergeTree()
 			ORDER BY inserted_at;`,
-			`CREATE TABLE ServiceRequest (
+			`CREATE TABLE service_request (
 				id                                              String,
 				version 					                    String NULL,			  						
 				inserted_at 				                    DateTime DEFAULT now(),					
