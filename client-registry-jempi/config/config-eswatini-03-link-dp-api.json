@@ -179,7 +179,7 @@
       ],
       "validation": {
         "required": false,
-        "regex": "^(male|female)$",
+        "regex": "^\\d{4}-\\d{2}-\\d{2}$",
         "onErrorMessage": ""
       },
       "accessLevel": []

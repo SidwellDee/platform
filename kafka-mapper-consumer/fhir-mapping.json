@@ -4,14 +4,21 @@
     "tableMappings": [
       {
         "targetTable": "Patient",
-        
         "columnMappings": [
           {
-            "columnName": "goldenId",
+            "columnName": "id",
+            "fhirPath": "Patient.id"
+          },
+          {
+            "columnName": "interaction_id",
+            "fhirPath": "Encounter.subject.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "golden_id",
             "fhirPath": "Patient.link.where(type='refer').other.reference.replace('Patient/', '')"
           },
           {
-            "columnName": "sourceSystem",
+            "columnName": "source_system",
             "fhirPath": "Patient.identifier.where(use='usual').system"
           },
           {
@@ -19,15 +26,7 @@
             "fhirPath": "Patient.identifier.where(system='urn:homeaffairs:population-register').value"
           },
           {
-            "columnName": "firstName",
-            "fhirPath": "Patient.name.given"
-          },
-          {
-            "columnName": "lastName",
-            "fhirPath": "Patient.name.family"
-          },
-          {
-            "columnName": "dateOfBirth",
+            "columnName": "date_of_birth",
             "fhirPath": "Patient.birthDate"
           },
           {
@@ -116,7 +115,7 @@
     "resourceType": "Observation",
     "tableMappings": [
       {
-        "targetTable":"Observation",
+        "targetTable": "Observation",
         "columnMappings": [
           {
             "columnName": "id",
@@ -225,6 +224,10 @@
           {
             "columnName": "value_period_end",
             "fhirPath": "Observation.valuePeriodEnd"
+          },
+          {
+            "columnName": "based_on",
+            "fhirPath": "Observation.basedOn[0].reference"
           }
         ]
       }
@@ -234,7 +237,7 @@
     "resourceType": "DiagnosticReport",
     "tableMappings": [
       {
-        "targetTable":"DiagnosticReport",
+        "targetTable": "DiagnosticReport",
         "columnMappings": [
           {
             "columnName": "id",
@@ -361,6 +364,80 @@
           {
             "columnName": "substitution_reason_display",
             "fhirPath": "MedicationRequest.reasonCode.coding[0].display"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resourceType": "ServiceRequest",
+    "tableMappings": [
+      {
+        "targetTables": "ServiceRequest",
+        "columnMappings": [
+          {
+            "columnName": "id",
+            "fhirPath": "ServiceRequest.id"
+          },
+          {
+            "columnName": "status",
+            "fhirPath": "ServiceRequest.status"
+          },
+          {
+            "columnName": "intent",
+            "fhirPath": "ServiceRequest.intent"
+          },
+          {
+            "columnName": "category_system",
+            "fhirPath": "ServiceRequest.category[0].coding[0].system"
+          },
+          {
+            "columnName": "category_code",
+            "fhirPath": "ServiceRequest.category[0].coding[0].code"
+          },
+          {
+            "columnName": "category_display",
+            "fhirPath": "ServiceRequest.category[0].coding[0].display"
+          },
+          {
+            "columnName": "priority",
+            "fhirPath": "ServiceRequest.priority"
+          },
+          {
+            "columnName": "code_system",
+            "fhirPath": "ServiceRequest.code.coding[0].system"
+          },
+          {
+            "columnName": "code_code",
+            "fhirPath": "ServiceRequest.code.coding[0].code"
+          },
+          {
+            "columnName": "code_display",
+            "fhirPath": "ServiceRequest.code.coding[0].display"
+          },
+          {
+            "columnName": "authored_on",
+            "fhirPath": "ServiceRequest.authoredOn"
+          },
+          {
+            "columnName": "note",
+            "fhirPath": "ServiceRequest.note.text"
+          },
+          {
+            "columnName": "subject_reference",
+            "fhirPath": "ServiceRequest.subject.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "encounter_reference",
+            "fhirPath": "ServiceRequest.encounter.reference.replace('Encounter/', '')"
+          },
+          {
+            "columnName": "practitioner_reference",
+            "fhirPath": "ServiceRequest.requester.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "secimen_reference",
+            "fhirPath": "ServiceRequest.specimen.reference.replace('Specimen/', '')"
           }
         ]
       }
