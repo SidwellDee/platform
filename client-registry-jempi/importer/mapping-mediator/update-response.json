@@ -9,25 +9,31 @@
     "output": "JSON"
   },
   "inputTransforms": {
-    "lastName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].family) ? {'name': 'lastName', 'value': requestBody.name[0].family} : null",
-    "firstName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].given) and $exists(requestBody.name[0].given[0]) ? {'name': 'firstName', 'value': requestBody.name[0].given[0]} : null",
-    "birthDate": "$exists(requestBody.birthDate) ? {'name': 'dob', 'value': requestBody.birthDate} : null",
-    "sex": "$exists(requestBody.gender) ? {'name': 'sex', 'value': requestBody.gender} : null",
-    "city": "$exists(requestBody.address) and $exists(requestBody.address[0]) and $exists(requestBody.address[0].city) ? {'name': 'city', 'value': requestBody.address[0].city} : null",
-    "phoneNumber": "$exists(requestBody.telecom) and $exists(requestBody.telecom[0]) and $exists(requestBody.telecom[0].value) ? {'name': 'cellPhone', 'value': requestBody.telecom[0].value} : null",
     "pin": "$exists(requestBody.identifier) and $exists(requestBody.identifier[0]) and $count($filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:homeaffairs:population-register')})) > 0 ? {'name': 'pin', 'value': $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:homeaffairs:population-register')})[0].value} : null",
-    "nationality": "$exists(requestBody.extension) and $count($filter(requestBody.extension, function($v) {$contains($v.url, 'http://hl7.org/fhir/StructureDefinition/patient-nationality')})) > 0 ? {'name': 'nationality', 'value': $filter(requestBody.extension, function($v) {$contains($v.url, 'http://hl7.org/fhir/StructureDefinition/patient-nationality')})[0].valueCodeableConcept.coding[0].display} : null"
+    "firstName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].given) and $exists(requestBody.name[0].given[0]) ? {'name': 'firstName', 'value': requestBody.name[0].given[0]} : null",
+    "middleName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].given) and $exists(requestBody.name[0].given[1]) ? {'name': 'middleName', 'value': requestBody.name[0].given[1]} : null",
+    "surname": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].family) ? {'name': 'surname', 'value': requestBody.name[0].family} : null",
+    "sex": "$exists(requestBody.gender) ? {'name': 'sex', 'value': requestBody.gender} : null",
+    "dob": "$exists(requestBody.birthDate) ? {'name': 'dob', 'value': requestBody.birthDate} : null",
+    "cellPhone": "$exists(requestBody.telecom) and $exists(requestBody.telecom[0]) and $exists(requestBody.telecom[0].value) ? {'name': 'cellPhone', 'value': requestBody.telecom[0].value} : null",
+    "inkhundla": "$exists(requestBody.extension) and $count($filter(requestBody.extension, function($v) {$contains($v.url, 'http://172.209.216.154:5001/fhir/StructureDefinition/SzInkhundlaExtension')})) > 0 ? {'name': 'inkhundla', 'value': $filter(requestBody.extension, function($v) {$contains($v.url, 'http://172.209.216.154:5001/fhir/StructureDefinition/SzInkhundlaExtension')})[0].valueCodeableConcept.coding[0].display} : null",
+    "chiefdom": "$exists(requestBody.extension) and $count($filter(requestBody.extension, function($v) {$contains($v.url, 'http://172.209.216.154:5001/fhir/StructureDefinition/SzChiefdomExtension')})) > 0 ? {'name': 'inkhundla', 'value': $filter(requestBody.extension, function($v) {$contains($v.url, 'http://172.209.216.154:5001/fhir/StructureDefinition/SzChiefdomExtension')})[0].valueCodeableConcept.coding[0].display} : null",
+    "nationality": "$exists(requestBody.extension) and $count($filter(requestBody.extension, function($v) {$contains($v.url, 'http://hl7.org/fhir/StructureDefinition/patient-nationality')})) > 0 ? {'name': 'nationality', 'value': $filter(requestBody.extension, function($v) {$contains($v.url, 'http://hl7.org/fhir/StructureDefinition/patient-nationality')})[0].valueCodeableConcept.coding[0].display} : null",
+    "city": "$exists(requestBody.address) and $exists(requestBody.address[0]) and $exists(requestBody.address[0].city) ? {'name': 'city', 'value': requestBody.address[0].city} : null"
   },
   "inputMapping": {
     "urlParams.patientId": "goldenId",
-    "transforms.lastName": "fields[]+",
-    "transforms.firstName": "fields[]+",
-    "transforms.birthDate": "fields[]+",
-    "transforms.sex": "fields[]+",
-    "transforms.city": "fields[]+",
-    "transforms.phoneNumber": "fields[]+",
     "transforms.pin": "fields[]+",
-    "transforms.nationality": "fields[]+"
+    "transforms.firstName": "fields[]+",
+    "transforms.middleName": "fields[]+",
+    "transforms.surname": "fields[]+",
+    "transforms.sex": "fields[]+",
+    "transforms.dob": "fields[]+",
+    "transforms.cellPhone": "fields[]+",
+    "transforms.inkhundla": "fields[]+",
+    "transforms.chiefdom": "fields[]+",
+    "transforms.nationality": "fields[]+",
+    "transforms.city": "fields[]+"
   },
   "requests": {
     "response": {
