@@ -3,7 +3,7 @@
     "resourceType": "Patient",
     "tableMappings": [
       {
-        "targetTable": "patient",
+        "targetTable": "Patient",
         "columnMappings": [
           {
             "columnName": "id",
@@ -53,7 +53,7 @@
     "resourceType": "Encounter",
     "tableMappings": [
       {
-        "targetTable": "encounter",
+        "targetTable": "Encounter",
         "columnMappings": [
           {
             "columnName": "id",
@@ -115,7 +115,7 @@
     "resourceType": "Observation",
     "tableMappings": [
       {
-        "targetTable": "observation",
+        "targetTable": "Observation",
         "columnMappings": [
           {
             "columnName": "id",
@@ -237,7 +237,7 @@
     "resourceType": "DiagnosticReport",
     "tableMappings": [
       {
-        "targetTable": "diagnostic_report",
+        "targetTable": "DiagnosticReport",
         "columnMappings": [
           {
             "columnName": "id",
@@ -287,7 +287,7 @@
     "resourceType": "MedicationRequest",
     "tableMappings": [
       {
-        "targetTables": "medication_request",
+        "targetTable": "MedicationRequest",
         "columnMappings": [
           {
             "columnName": "id",
@@ -373,7 +373,7 @@
     "resourceType": "ServiceRequest",
     "tableMappings": [
       {
-        "targetTables": "service_request",
+        "targetTable": "ServiceRequest",
         "columnMappings": [
           {
             "columnName": "id",
@@ -436,7 +436,7 @@
             "fhirPath": "ServiceRequest.requester.reference.replace('Patient/', '')"
           },
           {
-            "columnName": "secimen_reference",
+            "columnName": "specimen_reference",
             "fhirPath": "ServiceRequest.specimen.reference.replace('Specimen/', '')"
           }
         ]
