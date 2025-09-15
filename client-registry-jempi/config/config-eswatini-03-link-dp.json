@@ -162,14 +162,6 @@
       "fieldType": "String",
       "source": {
         "csvCol": 8
-      },
-      "indexGoldenRecord": "@index(trigram)",
-      "linkMetaData": {
-        "comparison": "JARO_WINKLER_SIMILARITY",
-        "comparisonLevels": [
-          0.92
-        ],
-        "m":0.99999905,"u":0.006147231
       }
     },
     {
@@ -177,14 +169,6 @@
       "fieldType": "String",
       "source": {
         "csvCol": 9
-      },
-      "indexGoldenRecord": "@index(trigram)",
-      "linkMetaData": {
-        "comparison": "JARO_WINKLER_SIMILARITY",
-        "comparisonLevels": [
-          0.92
-        ],
-        "m":0.99999905,"u":0.006147231
       }
     },
     {

@@ -10,7 +10,7 @@
   },
   "inputTransforms": {
     "currentDate": "$now()",
-    "sourcePatient": "$exists(requestBody.identifier) and $count($filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:health')})) > 0 ? {'patient': $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:health')})[0].value, 'facility': $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:health')})[0].system} : null",
+    "sourcePatient": "$exists(requestBody.identifier) and $count($filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:health')})) > 0 ? {'patient': $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:health')})[0].value, 'facility': $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:health')})[0].system} : {'patient': $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:homeaffairs:population-register')})[0].value, 'facility': $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:homeaffairs:population-register')})[0].system}",
     "pin": "$exists(requestBody.identifier) and $count($filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:homeaffairs:population-register')})) > 0 ? $filter(requestBody.identifier, function($v) {$contains($v.system, 'urn:homeaffairs:population-register')})[0].value : null",
     "firstName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].given[0]) ? requestBody.name[0].given[0] : null",
     "middleName": "$exists(requestBody.name) and $exists(requestBody.name[0]) and $exists(requestBody.name[0].given[1]) ? requestBody.name[0].given[1] : null",

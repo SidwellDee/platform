@@ -171,11 +171,9 @@
         "record_details"
       ],
       "scope": [
-        "/record-details/:uid",
         "/notifications/match-details",
         "/record-details/:uid/relink",
-        "/search/custom",
-        "/browse-records"
+        "/search/custom"
       ],
       "validation": {
         "required": false,
@@ -260,11 +258,9 @@
         "record_details"
       ],
       "scope": [
-        "/record-details/:uid",
         "/notifications/match-details",
         "/record-details/:uid/relink",
-        "/search/custom",
-        "/browse-records"
+        "/search/custom"
       ],
       "accessLevel": [],
       "validation": {
