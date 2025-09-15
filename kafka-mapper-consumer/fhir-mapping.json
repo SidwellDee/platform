@@ -38,12 +38,36 @@
             "fhirPath": "Patient.extension.where(url='http://hl7.org/fhir/StructureDefinition/patient-nationality').valueCodeableConcept.coding.where(system='urn:iso:std:iso:3166').display"
           },
           {
+            "columnName": "marital_status_system",
+            "fhirPath": "Patient.maritalStatus.coding[0].system"
+          },
+          {
+            "columnName": "marital_status_code",
+            "fhirPath": "Patient.maritalStatus.coding[0].code"
+          },
+          {
+            "columnName": "marital_status_display",
+            "fhirPath": "Patient.maritalStatus.coding[0].display"
+          },
+          {
             "columnName": "inkhundla",
             "fhirPath": "Patient.extension.where(url='http://172.209.216.154:5001/fhir/StructureDefinition/SzInkhundlaExtension').valueCodeableConcept.text"
           },
           {
             "columnName": "chiefdom",
             "fhirPath": "Patient.extension.where(url='http://172.209.216.154:5001/fhir/StructureDefinition/SzChiefdomExtension').valueCodeableConcept.text"
+          },
+          {
+            "columnName": "managing_organization",
+            "fhirPath": "Patient.managingOrganization.reference.replace('Organization/', '')"
+          },
+          {
+            "columnName":"deceased_boolean",
+            "fhirPath": "Patient.deceasedBoolean"
+          },
+          {
+            "columnName":"deceased_datetime",
+            "fhirPath": "Patient.deceasedDateTime"
           }
         ]
       }
@@ -438,6 +462,194 @@
           {
             "columnName": "specimen_reference",
             "fhirPath": "ServiceRequest.specimen.reference.replace('Specimen/', '')"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resourceType": "Location",
+    "tableMappings": [
+      {
+        "targetTable": "Location",
+        "columnMappings": [
+          {
+            "columnName": "id",
+            "fhirPath": "Location.id"
+          },
+          {
+            "columnName": "name",
+            "fhirPath": "Location.name"
+          },
+          {
+            "columnName": "type_system",
+            "fhirPath": "Location.type[0].coding[0].system"
+          },
+          {
+            "columnName": "type_code",
+            "fhirPath": "Location.type[0].coding[0].code"
+          },
+          {
+            "columnName": "type_display",
+            "fhirPath": "Location.type[0].coding[0].display"
+          },
+          {
+            "columnName": "telecom_system",
+            "fhirPath": "Location.telecom[0].system"
+          },
+          {
+            "columnName": "telecom_value",
+            "fhirPath": "Location.telecom[0].value"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resourceType": "Specimen",
+    "tableMappings": [
+      {
+        "targetTable": "Specimen",
+        "columnMappings": [
+          {
+            "columnName": "id",
+            "fhirPath": "Specimen.id"
+          },
+          {
+            "columnName": "status",
+            "fhirPath": "Specimen.status"
+          },
+          {
+            "columnName": "type_system",
+            "fhirPath": "Specimen.type.coding[0].system"
+          },
+          {
+            "columnName": "type_code",
+            "fhirPath": "Specimen.type.coding[0].code"
+          },
+          {
+            "columnName": "type_display",
+            "fhirPath": "Specimen.type.coding[0].display"
+          },
+          {
+            "columnName": "subject_reference",
+            "fhirPath": "Specimen.subject.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "service_request_reference",
+            "fhirPath": "Specimen.request[0].reference.replace('ServiceRequest/', '')"
+          },
+          {
+            "columnName": "collection_collector",
+            "fhirPath": "Specimen.collection.collector.reference.replace('Practitioner/', '')"
+          },
+          {
+            "columnName": "collection_date",
+            "fhirPath": "Specimen.collection.collectedDateTime"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resourceType": "EpisodeOfCare",
+    "tableMappings": [
+      {
+        "targetTable": "EpisodeOfCare",
+        "columnMappings": [
+          {
+            "columnName": "id",
+            "fhirPath": "EpisodeOfCare.id"
+          },
+          {
+            "columnName": "status",
+            "fhirPath": "EpisodeOfCare.status"
+          },
+          {
+            "columnName": "type_system",
+            "fhirPath": "EpisodeOfCare.type[0].coding[0].system"
+          },
+          {
+            "columnName": "type_code",
+            "fhirPath": "EpisodeOfCare.type[0].coding[0].code"
+          },
+          {
+            "columnName": "type_display",
+            "fhirPath": "EpisodeOfCare.type[0].coding[0].display"
+          },
+          {
+            "columnName": "patient_reference",
+            "fhirPath": "EpisodeOfCare.patient.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "managing_organization_reference",
+            "fhirPath": "EpisodeOfCare.managingOrganization.reference.replace('Organization/', '')"
+          },
+          {
+            "columnName": "period_start",
+            "fhirPath": "EpisodeOfCare.period.start"
+          },
+          {
+            "columnName": "period_end",
+            "fhirPath": "EpisodeOfCare.period.end"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resourceType": "Condition",
+    "tableMappings": [
+      {
+        "targetTable": "Condition",
+        "columnMappings": [
+          {
+            "columnName": "id",
+            "fhirPath": "Condition.id"
+          },
+          {
+            "columnName": "category_system",
+            "fhirPath": "Condition.category[0].coding[0].system"
+          },
+          {
+            "columnName": "category_code",
+            "fhirPath": "Condition.category[0].coding[0].code"
+          },
+          {
+            "columnName": "category_display",
+            "fhirPath": "Condition.category[0].coding[0].display"
+          },
+          {
+            "columnName": "code_system",
+            "fhirPath": "Condition.code.coding[0].system"
+          },
+          {
+            "columnName": "code_code",
+            "fhirPath": "Condition.code.coding[0].code"
+          },
+          {
+            "columnName": "code_display",
+            "fhirPath": "Condition.code.coding[0].display"
+          },
+          {
+            "columnName": "onset_datetime",
+            "fhirPath": "Condition.onsetDateTime"
+          },
+          {
+            "columnName": "patient_reference",
+            "fhirPath": "Condition.subject.reference.replace('Patient/', '')"
+          },
+          {
+            "columnName": "encounter_reference",
+            "fhirPath": "Condition.encounter.reference.replace('Encounter/', '')"
+          },
+          {
+            "columnName": "practitioner_reference",
+            "fhirPath": "Condition.recorder.reference.replace('Practitioner/', '')"
+          },
+          {
+            "columnName": "recorded_date",
+            "fhirPath": "Condition.recordedDate"
           }
         ]
       }

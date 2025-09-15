@@ -10,12 +10,18 @@ const queries =
 				last_updated 			Date NULL,
 				golden_id 				String,
 				source_system 			String,						-- Patient.identifier.system
-				pin 					String,						-- Patient.identifier.value	
+				pin 					String,						-- Patient.identifier.value
 				date_of_birth 			Date,						-- Patient.birthDate
 				gender 					String,						-- Patient.gender
 				nationality 			String,						-- Patient.extension.nationality
+				marital_status_system	String,
+				marital_status_code		String,
+				marital_status_display	String,
 				inkhundla 				String,						-- Patient.extension.inkhundla
-				chiefdom 				String						-- Patient.extension.chiefdom
+				chiefdom 				String,						-- Patient.extension.chiefdom
+				managing_organization	String,
+				deceased_boolean		Boolean NULL,
+				deceased_datetime		DATETIME NULL
 			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
 			ORDER BY tuple();`,
 			`CREATE TABLE Encounter(
@@ -54,6 +60,7 @@ const queries =
 				subject_reference 			    String,
 				encounter_reference 		    String,
 				practitioner_reference 		    String,
+				based_on						String,
 				value_type 				    	String, -- Type of the value (e.g., Quantity, CodeableConcept, etc.)
 				value_quantity_value 			Decimal(18,4) NULL,
 				value_quantity_unit 			String NULL,			
@@ -144,7 +151,79 @@ const queries =
 				practitioner_reference							String,
 				specimen_reference								String,	
 			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
-			ORDER BY inserted_at;`
+			ORDER BY inserted_at;`,
+			`CREATE TABLE Location (
+				id                              String,
+				version 					    String NULL,			  						
+				inserted_at 				    DateTime DEFAULT now(),					
+				last_updated 				    Date NULL,	
+				name                            String,
+				description                     String,
+				type_system						String,
+				type_code                       String,
+				type_display                    String,
+				address_line1                   String,
+				address_city                    String,
+				address_state                   String,
+				address_postalCode              String,
+				address_country                 String,
+				position_latitude               Float64,
+				position_longitude              Float64,
+				position_altitude               Float64,
+				managing_org_id                 String,
+				telecom_system                  String,
+				telecom_value                   String
+			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
+			ORDER BY id;`,
+			`CREATE TABLE Specimen (
+				id                              String,
+				version 					    String NULL,			  						
+				inserted_at 				    DateTime DEFAULT now(),					
+				last_updated 				    Date NULL,	
+				status							String,
+				type_system						String,
+				type_code						String,
+				type_display					String,
+				subject_reference				String,
+				service_request_reference		String,
+				collection_collector			String,
+				collection_date					DateTime NULL
+			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
+			 ORDER BY inserted_at`,
+			 `CREATE TABLE EpisodeOfCare (
+			 	id                              String,
+				version 					    String NULL,			  						
+				inserted_at 				    DateTime DEFAULT now(),					
+				last_updated 				    Date NULL,	
+				status							String,
+				type_system						String,
+				type_code						String,
+				type_display					String,
+				patient_reference				String,
+				managing_organization_reference	String,
+				period_start					DateTime NULL,
+				period_end						DateTime NULL,
+				service_request_reference		String
+			 ) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
+			  ORDER BY inserted_at`,
+			  `CREATE TABLE Condition (
+			 	id                              String,
+				version 					    String NULL,			  						
+				inserted_at 				    DateTime DEFAULT now(),					
+				last_updated 				    Date NULL,	
+				category_system					String,
+				category_code					String,
+				category_display				String,
+				code_system						String,
+				code_code						String,
+				code_display					String,
+				onset_datetime					DateTime NULL,
+				patient_reference				String,
+				encounter_reference				String,
+				recorded_date					String,
+				practitioner_reference			String
+			 ) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
+			  ORDER BY inserted_at`
 		]
 		: [
 			`CREATE TABLE Patient(
@@ -157,9 +236,15 @@ const queries =
 				pin 					String,						
 				date_of_birth 			Date,						
 				gender 					String,						
-				nationality 			String,						
+				nationality 			String,	
+				marital_status_system	String,
+				marital_status_code		String,
+				marital_status_display	String,					
 				inkhundla 				String,						
-				chiefdom 				String						
+				chiefdom 				String,
+				managing_organization	String,
+				deceased_boolean		Boolean NULL,
+				deceased_datetime		DATETIME NULL						
 			) 
 			ENGINE=MergeTree
 			ORDER BY tuple();`,
@@ -201,6 +286,7 @@ const queries =
 				subject_reference 			    String,
 				encounter_reference 		    String,
 				practitioner_reference 		    String,
+				based_on						String,
 				value_type 				    	String, -- Type of the value (e.g., Quantity, CodeableConcept, etc.)
 				value_quantity_value 			Decimal(18,4) NULL,
 				value_quantity_unit 			String NULL,			
@@ -292,7 +378,79 @@ const queries =
 				practitioner_reference							String,
 				specimen_reference								String,	
 			) ENGINE = MergeTree()
-			ORDER BY inserted_at;`
+			ORDER BY inserted_at;`,
+			`CREATE TABLE Location (
+				id                              String,
+				version 					    String NULL,			  						
+				inserted_at 				    DateTime DEFAULT now(),					
+				last_updated 				    Date NULL,	
+				name                            String,
+				description                     String,
+				type_system						String,
+				type_code                       String,
+				type_display                    String,
+				address_line1                   String,
+				address_city                    String,
+				address_state                   String,
+				address_postalCode              String,
+				address_country                 String,
+				position_latitude               Float64,
+				position_longitude              Float64,
+				position_altitude               Float64,
+				managing_org_id                 String,
+				telecom_system                  String,
+				telecom_value                   String
+			) ENGINE = MergeTree()
+			ORDER BY id;`,
+			`CREATE TABLE Specimen (
+				id                              String,
+				version 					    String NULL,			  						
+				inserted_at 				    DateTime DEFAULT now(),					
+				last_updated 				    Date NULL,	
+				status							String,
+				type_system						String,
+				type_code						String,
+				type_display					String,
+				subject_reference				String,
+				service_request_reference		String,
+				collection_collector			String,
+				collection_date					DateTime NULL
+			) ENGINE = MergeTree()
+			 ORDER BY inserted_at`,
+			 `CREATE TABLE EpisodeOfCare (
+			 	id                              String,
+				version 					    String NULL,			  						
+				inserted_at 				    DateTime DEFAULT now(),					
+				last_updated 				    Date NULL,	
+				status							String,
+				type_system						String,
+				type_code						String,
+				type_display					String,
+				patient_reference				String,
+				managing_organization_reference	String,
+				period_start					DateTime NULL,
+				period_end						DateTime NULL,
+				service_request_reference		String
+			 ) ENGINE = MergeTree()
+			  ORDER BY inserted_at`,
+			  `CREATE TABLE Condition (
+			 	id                              String,
+				version 					    String NULL,			  						
+				inserted_at 				    DateTime DEFAULT now(),					
+				last_updated 				    Date NULL,	
+				category_system					String,
+				category_code					String,
+				category_display				String,
+				code_system						String,
+				code_code						String,
+				code_display					String,
+				onset_datetime					DateTime NULL,
+				patient_reference				String,
+				encounter_reference				String,
+				recorded_date					String,
+				practitioner_reference			String
+			 ) ENGINE = MergeTree()
+			  ORDER BY inserted_at`
 		];
 
 module.exports = queries;
