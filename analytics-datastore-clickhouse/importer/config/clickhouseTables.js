@@ -19,7 +19,9 @@ const queries =
 				marital_status_display	String,
 				inkhundla 				String,						-- Patient.extension.inkhundla
 				chiefdom 				String,						-- Patient.extension.chiefdom
+				residential_address		String,
 				managing_organization	String,
+				registration_date		DateTimeNULL,
 				deceased_boolean		Boolean NULL,
 				deceased_datetime		DATETIME NULL
 			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
@@ -242,7 +244,9 @@ const queries =
 				marital_status_display	String,					
 				inkhundla 				String,						
 				chiefdom 				String,
+				residential_address		String,
 				managing_organization	String,
+				registration_date		DateTimeNULL,
 				deceased_boolean		Boolean NULL,
 				deceased_datetime		DATETIME NULL						
 			) 

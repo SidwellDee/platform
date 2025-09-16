@@ -58,8 +58,16 @@
             "fhirPath": "Patient.extension.where(url='http://172.209.216.154:5001/fhir/StructureDefinition/SzChiefdomExtension').valueCodeableConcept.text"
           },
           {
+            "columnName": "residential_address",
+            "fhirPath": "Patient.address[0].city"
+          },
+          {
             "columnName": "managing_organization",
             "fhirPath": "Patient.managingOrganization.reference.replace('Organization/', '')"
+          },
+          {
+            "columnName": "registration_date",
+            "fhirPath": "Patient.extension.where(url='http://172.209.216.154:5001/fhir/StructureDefinition/SzRegistrationDate').valueDateTime"
           },
           {
             "columnName":"deceased_boolean",
