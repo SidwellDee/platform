@@ -21,7 +21,7 @@ const queries =
 				chiefdom 				String,						-- Patient.extension.chiefdom
 				residential_address		String,
 				managing_organization	String,
-				registration_date		DateTimeNULL,
+				registration_date		DateTime NULL,
 				deceased_boolean		Boolean NULL,
 				deceased_datetime		DATETIME NULL
 			) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{cluster}/{shard}/{table}', '{replica}')
@@ -246,7 +246,7 @@ const queries =
 				chiefdom 				String,
 				residential_address		String,
 				managing_organization	String,
-				registration_date		DateTimeNULL,
+				registration_date		DateTime NULL,
 				deceased_boolean		Boolean NULL,
 				deceased_datetime		DATETIME NULL						
 			) 
