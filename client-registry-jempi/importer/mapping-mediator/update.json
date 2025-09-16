@@ -13,6 +13,7 @@
       "requestBody.resourceType": "resourceType",
       "requestBody.identifier": "identifier",
       "requestBody.extension": "extension",
+      "requestBody.maritalStatus": "maritalStatus",
       "requestBody.name": "name",
       "requestBody.gender": "gender",
       "requestBody.birthDate": "birthDate",

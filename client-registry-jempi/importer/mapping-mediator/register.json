@@ -22,6 +22,7 @@
     "requestBody.identifier": "identifier",
     "constants.active": "active",
     "requestBody.extension": "extension",
+    "requestBody.maritalStatus": "maritalStatus",
     "requestBody.name": "name",
     "requestBody.gender": "gender",
     "requestBody.birthDate": "birthDate",
