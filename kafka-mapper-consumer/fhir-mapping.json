@@ -51,11 +51,11 @@
           },
           {
             "columnName": "inkhundla",
-            "fhirPath": "Patient.extension.where(url='http://172.209.216.154:5001/fhir/StructureDefinition/SzInkhundlaExtension').valueCodeableConcept.text"
+            "fhirPath": "Patient.extension.where(url.endsWith('SzInkhundlaExtension')).valueCodeableConcept.text"
           },
           {
             "columnName": "chiefdom",
-            "fhirPath": "Patient.extension.where(url='http://172.209.216.154:5001/fhir/StructureDefinition/SzChiefdomExtension').valueCodeableConcept.text"
+            "fhirPath": "Patient.extension.where(url.endsWith('SzChiefdomExtension')).valueCodeableConcept.text"
           },
           {
             "columnName": "residential_address",
@@ -67,7 +67,7 @@
           },
           {
             "columnName": "registration_date",
-            "fhirPath": "Patient.extension.where(url='http://172.209.216.154:5001/fhir/StructureDefinition/SzRegistrationDate').valueDateTime"
+            "fhirPath": "Patient.extension.where(url.endsWith('SzRegistrationDate')).valueDateTime"
           },
           {
             "columnName":"deceased_boolean",
