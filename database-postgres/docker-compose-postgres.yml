@@ -16,6 +16,7 @@ services:
       REPMGR_DEGRADED_MONITORING_TIMEOUT: ${POSTGRES_DEGRADED_MONITORING_TIMEOUT}
     volumes:
       - "hapi-postgres-1-data:/bitnami/postgresql"
+      - "/home/backups:/backup"
     configs:
       - target: /bitnami/postgresql/conf/conf.d/custom_postgresql.conf
         source: postgresql.conf
