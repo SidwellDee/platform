@@ -1,0 +1,15 @@
+{
+  "id": "data-access-mediator",
+  "name": "Data Access Mediator",
+  "description": "Mediator for accessing data from the platform",
+  "type": "infrastructure",
+  "version": "0.0.1",
+  "dependencies": ["interoperability-layer-openhim"],
+  "environmentVariables": {
+    "DATA_ACCESS_MEDIATOR_IMAGE": "hmisecmis/data-access-mediator",
+    "DB_SERVER": "localhost\\instance",
+    "DB_NAME": "database",
+    "DB_USER": "user",
+    "DB_PASSWORD": "password"
+  }
+}

@@ -1,0 +1,22 @@
+services:
+  data-access-mediator:
+    image: ${DATA_ACCESS_MEDIATOR_IMAGE}
+    environment:
+      DB_SERVER: ${DB_SERVER}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    networks:
+      openhim:
+      data-access:
+      default:
+
+
+networks:
+  openhim:
+    name: openhim_public
+    external: true
+  data-access:
+    name: data-access_public
+    external: true
+  default:

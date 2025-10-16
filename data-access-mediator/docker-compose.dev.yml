@@ -1,0 +1,6 @@
+services:
+  data-access-mediator:
+    ports:
+      - target: 8080
+        published: 6200
+        mode: host
