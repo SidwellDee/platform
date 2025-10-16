@@ -4,8 +4,7 @@ CONTAINER_NAME="d6e6e572b6b2"
 PG_USER="postgres"
 PG_PASSWORD="instant101"
 OUTPUT_DIR="/home/pg_basebackups"
-#DATE=$(date +%Y%m%d_%H%M%S)
-DATE=$(date +%Y%m%d)
+DATE=$(date +%Y%m%d_%H%M%S)
 
 DATABASES=("audit_db" "hapi" "kc_test_db" "keycloak" "mpi_db" "notifications_db" "postgres" "repmgr" "superset" "users_db")
 

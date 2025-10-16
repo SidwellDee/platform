@@ -160,29 +160,6 @@
       }
     },
     {
-      "fieldName": "birthTime",
-      "fieldType": "String",
-      "fieldLabel": "Birth Time",
-      "groups": [
-        "demographics",
-        "filter",
-        "sub_heading",
-        "linked_records",
-        "record_details"
-      ],
-      "scope": [
-        "/notifications/match-details",
-        "/record-details/:uid/relink",
-        "/search/custom"
-      ],
-      "validation": {
-        "required": false,
-        "regex": "^\\d{4}-\\d{2}-\\d{2}$",
-        "onErrorMessage": ""
-      },
-      "accessLevel": []
-    },
-    {
       "fieldName": "cellPhone",
       "fieldType": "String",
       "fieldLabel": "Cell Phone",

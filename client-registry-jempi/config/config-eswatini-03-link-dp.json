@@ -137,10 +137,6 @@
         ],
         "m":0.83510715,"u":5.832308E-5
       }
-    },  
-    {
-      "fieldName": "birth_time",
-      "fieldType": "String"
     },
     {
       "fieldName": "cell_phone",
