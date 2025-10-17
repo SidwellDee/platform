@@ -10,6 +10,9 @@
     "DB_SERVER": "localhost\\instance",
     "DB_NAME": "database",
     "DB_USER": "user",
-    "DB_PASSWORD": "password"
+    "DB_PASSWORD": "password",
+    "OPENHIM_CONSOLE_BASE_URL": "http://localhost:9000",
+    "OPENHIM_USERNAME": "root@openhim.org",
+    "OPENHIM_PASSWORD": "instant101"
   }
 }

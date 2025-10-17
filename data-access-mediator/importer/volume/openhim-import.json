@@ -1,0 +1,107 @@
+{
+  "Users": [
+    {
+      "firstname": "Super",
+      "surname": "User",
+      "email": "root@openhim.org",
+      "provider": "token",
+      "groups": ["admin"],
+      "passwordAlgorithm": null,
+      "passwordHash": null,
+      "passwordSalt": null,
+      "expiry": null,
+      "locked": false,
+      "token": null,
+      "tokenType": null
+    }
+  ],
+  "Clients": [
+    {
+      "clientID": "instant-client",
+      "name": "Instant Client",
+      "roles": ["instant"],
+      "customTokenID": "test"
+    }
+  ],
+  "Channels": [
+    {
+      "name": "Data Access",
+      "description": "Platform Data Access Mediator",
+      "urlPattern": "^/data-access/get-data.*$",
+      "methods": [
+        "GET"
+      ],
+      "type": "http",
+      "priority": null,
+      "tcpPort": null,
+      "tcpHost": null,
+      "pollingSchedule": null,
+      "requestBody": true,
+      "responseBody": true,
+      "allow": ["instant"],
+      "whitelist": [],
+      "authType": "private",
+      "routes": [
+        {
+          "name": "Data Access Mediator",
+          "type": "http",
+          "status": "enabled",
+          "secured": false,
+          "host": "data-access-mediator",
+          "port": 8080,
+          "path": "/api/data-access/get-data",
+          "pathTransform": "",
+          "primary": true,
+          "username": "",
+          "password": "",
+          "forwardAuthHeader": true,
+          "waitPrimaryResponse": false,
+          "statusCodesCheck": "2**"
+        }
+      ],
+      "matchContentTypes": [],
+      "matchContentRegex": null,
+      "matchContentXpath": null,
+      "matchContentJson": null,
+      "matchContentValue": null,
+      "properties": [],
+      "txViewAcl": [],
+      "txViewFullAcl": [],
+      "txRerunAcl": [],
+      "alerts": [],
+      "status": "enabled",
+      "rewriteUrls": false,
+      "addAutoRewriteRules": true,
+      "rewriteUrlsConfig": [],
+      "autoRetryEnabled": false,
+      "autoRetryPeriodMinutes": 60,
+      "updatedBy": {
+        "id": "65d47e98223a0672c3c9808b",
+        "name": "Super User"
+      }
+    }
+  ],
+  "Mediators": [
+    {
+      "urn": "urn:mediator:data-access-mediator",
+      "version": "1.0.0",
+      "name": "Data Access Mediator",
+      "description": "Platform Data Access Mediator",
+      "endpoints": [
+        {
+          "name": "Data Access Mediator",
+          "type": "http",
+          "status": "enabled",
+          "host": "data-access-mediator",
+          "port": 8080,
+          "forwardAuthHeader": false
+        }
+      ],
+      "defaultChannelConfig": [],
+      "configDefs": [],
+      "_lastHeartbeat": "2025-10-17T16:09:57.075Z",
+      "_uptime": 101055.747901311
+    }
+  ],
+  "ContactGroups": []
+}
