@@ -8,6 +8,8 @@ services:
         "start",
         "--proxy=edge",
         "--hostname-url=${KC_FRONTEND_URL}",
+        "--hostname-strict=false",
+        "--hostname-admin-url=${KC_ADMIN_URL}",
         "--import-realm",
       ]
     hostname: identity-access-manager-keycloak
