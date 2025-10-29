@@ -28,6 +28,7 @@ packages:
   - reprocess-mediator
   - fhir-ig-importer
   - data-access-mediator
+  - database-dgraph
 
 profiles:
   - name: cdr-dw
@@ -49,6 +50,7 @@ profiles:
       - fhir-ig-importer
       - reprocess-mediator
       - data-access-mediator
+      - database-dgraph
     envFiles:
       - cdr-dw.env
 
@@ -65,6 +67,7 @@ profiles:
       - client-registry-jempi
       - identity-access-manager-keycloak
       - openhim-mapping-mediator
+      - database-dgraph
     envFiles:
       - cdr.env
 
@@ -78,6 +81,7 @@ profiles:
       - client-registry-jempi
       - identity-access-manager-keycloak
       - openhim-mapping-mediator
+      - database-dgraph
     envFiles:
       - mpi.env
 
@@ -91,5 +95,6 @@ profiles:
       - client-registry-jempi
       - identity-access-manager-keycloak
       - openhim-mapping-mediator
+      - database-dgraph
     envFiles:
       - mpi-qa.env

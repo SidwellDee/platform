@@ -82,6 +82,7 @@ services:
       default:
       jempi:
       postgres:
+      reverse-proxy:
   
   jempi-em-scala:
     image: jembi/jempi-em-scala:${JEMPI_EM_SCALA_IMAGE_TAG}
@@ -102,6 +103,7 @@ services:
       kafka:
       default:
       jempi:
+      reverse-proxy:
 
   jempi-linker:
     image: jembi/jempi-linker:${JEMPI_LINKER_IMAGE_TAG}
@@ -143,6 +145,7 @@ services:
       default:
       jempi:
       postgres:
+      reverse-proxy:
 
 
 volumes:
@@ -158,6 +161,9 @@ networks:
     external: true
   postgres:
     name: postgres_public
+    external: true
+  reverse-proxy:
+    name: reverse-proxy_public
     external: true
 
 configs:

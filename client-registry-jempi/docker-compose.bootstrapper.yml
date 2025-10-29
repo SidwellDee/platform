@@ -27,6 +27,7 @@ services:
       default:
       jempi:
       postgres:
+      reverse-proxy:
 
 volumes:
   jempi-shared-data:
@@ -41,6 +42,9 @@ networks:
     external: true
   postgres:
     name: postgres_public
+    external: true
+  reverse-proxy:
+    name: reverse-proxy_public
     external: true
 
 configs:

@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  jempi-zero-01:
+    ports:
+      - published: 5080
+        target: 5080
+        protocol: tcp
+        mode: host
+      - published: 6080
+        target: 6080
+        protocol: tcp
+        mode: host
+
+  jempi-zero-02:
+    ports:
+      - published: 5081
+        target: 5080
+        protocol: tcp
+        mode: host
+      - published: 6081
+        target: 6080
+        protocol: tcp
+        mode: host
+
+  jempi-zero-03:
+    ports:
+      - published: 5082
+        target: 5080
+        protocol: tcp
+        mode: host
+      - published: 6082
+        target: 6080
+        protocol: tcp
+        mode: host

@@ -32,18 +32,12 @@ function import_sources() {
 }
 
 function initialize_package() {
-  local dgraph_dev_compose_param=""
-  local dgraph_zero_dev_compose_param=""
   local combined_cluster_compose_param=""
   local api_dev_compose_param=""
   local web_dev_compose_param=""
-  local dgraph_cluster_compose_param=""
-  local dgraph_zero_cluster_compose_param=""
 
   if [[ "$MODE" == "dev" ]]; then
     log info "Running package in DEV mode"
-    dgraph_dev_compose_param="docker-compose.dgraph-dev.yml"
-    dgraph_zero_dev_compose_param="docker-compose.dgraph-zero-dev.yml"
     api_dev_compose_param="docker-compose.api-dev.yml"
     web_dev_compose_param="docker-compose.web-dev.yml"
   else
@@ -51,8 +45,6 @@ function initialize_package() {
   fi
 
   if [[ "$CLUSTERED_MODE" == "true" ]]; then
-    dgraph_cluster_compose_param="docker-compose.dgraph-cluster.yml"
-    dgraph_zero_cluster_compose_param="docker-compose.dgraph-zero-cluster.yml"
     combined_cluster_compose_param="docker-compose.combined-cluster.yml"
   fi
 
@@ -65,11 +57,6 @@ function initialize_package() {
 
     log info "Configuring postgres database"
     docker::deploy_config_importer $STACK "$COMPOSE_FILE_PATH/importer/postgres/docker-compose.config.yml" "jempi_db_config" "jempi"
-
-    log info "Deploy Dgraph"
-    docker::deploy_service $STACK "${COMPOSE_FILE_PATH}" "docker-compose.dgraph-zero.yml" "$dgraph_zero_dev_compose_param" "$dgraph_zero_cluster_compose_param"
-
-    docker::deploy_service $STACK "${COMPOSE_FILE_PATH}" "docker-compose.dgraph.yml" "$dgraph_dev_compose_param" "$dgraph_cluster_compose_param"
 
     log info "Deploy Boostrapper"
     docker::deploy_service $STACK "${COMPOSE_FILE_PATH}" "docker-compose.bootstrapper.yml" "$combined_cluster_compose_param"
