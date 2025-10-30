@@ -6,7 +6,7 @@
   "version": "0.0.1",
   "dependencies": ["interoperability-layer-openhim"],
   "environmentVariables": {
-    "DATA_ACCESS_MEDIATOR_IMAGE": "hmisecmis/data-access-mediator",
+    "DATA_ACCESS_MEDIATOR_IMAGE": "hmisecmis/data-access-mediator:1.0.0",
     "DB_SERVER": "localhost\\instance",
     "DB_NAME": "database",
     "DB_USER": "user",
