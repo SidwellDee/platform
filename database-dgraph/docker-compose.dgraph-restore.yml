@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  jempi-alpha-01-restore:
+    image: dgraph/dgraph:v23.1.1
+    hostname: alpha-01-restore
+    volumes:
+      - /home/sidwelldlamini/eswatini_hie/backups/alpha_1/2025-11-08_18-17-13/dgraph.r215069.u1108.1617:/tmp
+    command: dgraph live --alpha jempi-alpha-01:9080 --zero=jempi-zero-01:5080 -f /tmp/g01.rdf.gz -s /tmp/g01.schema.gz
+    networks:
+      - jempi
+
+networks:
+  jempi:
+    name: jempi_public
+    external: true

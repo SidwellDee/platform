@@ -5,6 +5,7 @@ services:
     image: ${KAFDROP_IMAGE}
     networks:
       public:
+      reverse-proxy:
       default:
     environment:
       KAFKA_BROKERCONNECT: ${KAFKA_HOSTS}
@@ -45,5 +46,8 @@ networks:
     external: true
   public:
     name: kafka_public
+    external: true
+  reverse-proxy:
+    name: reverse-proxy_public
     external: true
   default:
