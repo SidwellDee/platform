@@ -9,6 +9,7 @@ services:
       CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
     volumes:
       - clickhouse-data:/var/lib/clickhouse/
+      - /home/sidwelldlamini/eswatini_hie/backups/clickhouse:/var/backups
     configs:
       - target: /etc/clickhouse-server/config.d/metric_log.xml
         source: clickhouse_metric_log.xml
@@ -18,6 +19,8 @@ services:
         source: clickhouse_query_log.xml
       - target: /etc/clickhouse-server/config.d/trace_log.xml
         source: clickhouse_trace_log.xml
+      - target: /etc/clickhouse-server/config.d/backups.xml
+        source: clickhouse_backups.xml
     networks:
       public:
       reverse-proxy:
@@ -47,7 +50,11 @@ configs:
     name: trace_log.xml.xml-${trace_log_xml_DIGEST:?err}
     labels:
       name: clickhouse
-
+  clickhouse_backups.xml:
+    file: ./general_configs/backups.xml
+    name: backups.xml.xml-${backups_xml_DIGEST:?err}
+    labels:
+      name: clickhouse
 networks:
   public:
     name: clickhouse_public

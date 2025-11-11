@@ -1,12 +1,12 @@
 #!/bin/bash
 
-CONTAINER_NAME="d6e6e572b6b2"
+CONTAINER_NAME=$(docker ps --filter "name=postgres_postgres-1" --format "{{.Names}}")
 PG_USER="postgres"
 PG_PASSWORD="instant101"
-OUTPUT_DIR="/home/pg_basebackups"
+OUTPUT_DIR="/home/$USER/eswatini_hie/backups/pgsql"
 DATE=$(date +%Y%m%d_%H%M%S)
 
-DATABASES=("audit_db" "hapi" "kc_test_db" "keycloak" "mpi_db" "notifications_db" "postgres" "repmgr" "superset" "users_db")
+DATABASES=("audit_db" "hapi" "kc_test_db" "keycloak" "notifications_db" "postgres" "repmgr" "superset" "users_db")
 
 mkdir -p "$OUTPUT_DIR/$DATE"
 

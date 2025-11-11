@@ -1,11 +1,11 @@
 #!/bin/bash
 
-CONTAINER_NAME="b0c14ecf946f"
+CONTAINER_NAME=$(docker ps --filter "name=postgres_postgres-1" --format "{{.Names}}")
 PG_USER="postgres"
 PG_PASSWORD="instant101"
 DATE=$(date +%Y%m%d)
 
-DATABASES=("audit_db" "hapi" "kc_test_db" "keycloak" "mpi_db" "notifications_db" "postgres" "repmgr" "superset" "users_db")
+DATABASES=("audit_db" "hapi" "kc_test_db" "keycloak" "notifications_db" "postgres" "repmgr" "superset" "users_db")
 
 BACKUPS=("audit_db_$DATE.tar" 
     "hapi_$DATE.tar" 
