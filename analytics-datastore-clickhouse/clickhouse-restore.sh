@@ -15,7 +15,7 @@ BACKUP_TIMESTAMP="20251111_104642"
 for DB in "${DATABASES[@]}"; do
     echo "Restoring database: $DB"
 
-    docker exec "$CONTAINER_NAME" clickhouse-client --query="RESTORE DATABASE ${DB} FROM Disk('backups', '${DB}_${BACKUP_TIMESTAMP}/') SETTINGS allow_non_empty_tables=true"
+    docker exec "$CONTAINER_NAME" clickhouse-client --query="RESTORE DATABASE ${DB} FROM Disk('backups', '${DB}_${BACKUP_TIMESTAMP}/');"
 
     if [ $? -ne 0 ]; then
         echo "Error: Failed to restore database '$DB'."
