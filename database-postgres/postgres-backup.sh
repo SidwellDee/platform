@@ -13,7 +13,7 @@ mkdir -p "$OUTPUT_DIR/$DATE"
 for DB in "${DATABASES[@]}"; do
     OUTPUT_FILE="${OUTPUT_DIR}/$DATE/${DB}_${DATE}.tar"
     echo "Backing up database: $DB to $OUTPUT_FILE"
-    docker exec -i "$CONTAINER_NAME" bash -c "PGPASSWORD='$PG_PASSWORD' pg_dump -U $PG_USER -F t $DB" > "$OUTPUT_FILE"
+    docker exec -i "$CONTAINER_NAME" bash -c "PGPASSWORD='$PG_PASSWORD' pg_dump --data-only -U $PG_USER -F t $DB" > "$OUTPUT_FILE"
 done
 
 echo "Backup completed for all databases."

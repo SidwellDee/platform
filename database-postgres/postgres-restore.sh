@@ -3,7 +3,7 @@
 CONTAINER_NAME=$(docker ps --filter "name=postgres_postgres-1" --format "{{.Names}}")
 PG_USER="postgres"
 PG_PASSWORD="instant101"
-DATE=$(date +%Y%m%d)
+DATE="20251113_145122"
 
 DATABASES=("audit_db" "hapi" "kc_test_db" "keycloak" "notifications_db" "postgres" "repmgr" "superset" "users_db")
 
@@ -24,7 +24,7 @@ for i in "${!DATABASES[@]}"; do
     
     echo "Restoring $DB_NAME from $BACKUP_FILE..."
 
-    docker exec -i "$CONTAINER_NAME" bash -c "PGPASSWORD='$PG_PASSWORD' pg_restore --clean --verbose -U $PG_USER -d $DB_NAME /backup/$DATE/$BACKUP_FILE"
+    docker exec -i "$CONTAINER_NAME" bash -c "PGPASSWORD='$PG_PASSWORD' pg_restore --clean --if-exists --verbose -U $PG_USER -d $DB_NAME /var/backups/$DATE/$BACKUP_FILE"
 
     echo "Finished restoring $DB_NAME"
 done
